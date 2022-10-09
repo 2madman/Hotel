@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "468451981420",
+    "project_id": "hotel-management-flutter",
+    "storage_bucket": "hotel-management-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468451981420:android:8be4292ea06e4fdeaf0049",
+        "android_client_info": {
+          "package_name": "com.example.first_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468451981420-5o1l4idc3ntfpjove94klnslcbpu2ptl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDwdO6VTXjseXm3x2ii7sXMOQCZRQY6jc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468451981420-5o1l4idc3ntfpjove94klnslcbpu2ptl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
