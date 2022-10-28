@@ -1,9 +1,7 @@
 import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:first_app/firebase_options.dart';
-
+import 'package:first_app/views/rooms_view.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
 
@@ -29,7 +27,13 @@ class NavigationDrawerWidget extends StatelessWidget {
             const SizedBox(height: 15,),
             buildMenuItem(
               text: "Rooms",
-              icon: Icons.meeting_room
+              icon: Icons.meeting_room,
+              onClicked: (){
+                 Navigator.of(context).push
+                (MaterialPageRoute(builder: (BuildContext context){
+                  return const RoomsView();
+                }));
+              },
             ),
             buildMenuItem(
               text: "Facility",
@@ -69,20 +73,18 @@ showAlertDialog(BuildContext context) {
   Widget continueButton = TextButton(
     child: const Text("Log Out"),
     onPressed: () async {
-      
-      final FirebaseAuth user = FirebaseAuth.instance;
-      
       await FirebaseAuth.instance.signOut();
-      /*Navigator.of(context).push
+      Navigator.of(context).push
       (MaterialPageRoute(builder: (BuildContext context){
         return const LoginView();
-      }));*/
+      }));
     },
   );
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: const Text("Log out?"),
+    content: const Text("Are you sure you want to sign out?"),
     actions: [
       cancelButton,
       continueButton,
@@ -103,11 +105,11 @@ Widget buildMenuItem({
   required IconData icon,
   VoidCallback? onClicked,
 }) {
-  final color = Colors.white;
+  const color = Colors.white;
 
   return ListTile(
     leading: Icon(icon, color: color),
-    title: Text(text, style: TextStyle(color:color)),
+    title: Text(text, style: const TextStyle(color:color)),
     onTap: onClicked,
   );
 

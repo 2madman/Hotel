@@ -2,7 +2,7 @@ import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'views/login_view.dart';
 import 'views/housekeeper_view.dart';
-
+import 'views/register_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized;
@@ -33,6 +33,6 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LoginView();
+    return const RegisterView();
   }
 }

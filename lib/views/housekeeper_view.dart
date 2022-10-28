@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './widget/appbar.dart';
+import '../widget/appbar.dart';
 
 class HouseKeeper extends StatefulWidget {
   const HouseKeeper({Key? key}) : super(key: key);

@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
-import './housekeeper_view.dart';
+import './login_view.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+
+class RegisterView extends StatefulWidget {
+  const RegisterView({Key? key}) : super(key: key);
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class _RegisterViewState extends State<RegisterView> {
+  
   late final TextEditingController _email;
   late final TextEditingController _password;
 
@@ -28,7 +30,7 @@ class _LoginViewState extends State<LoginView> {
     _password.dispose();
     super.dispose();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,18 +42,17 @@ class _LoginViewState extends State<LoginView> {
                 ),
         builder: (context, snapshot) {
           switch (snapshot.connectionState){
-            
             case ConnectionState.done:
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Text(
-                    "Hello Again!",
+                    "Registering Employee",
                     style: TextStyle(
                       fontWeight: FontWeight.bold, 
                       fontSize: 40),
                     ),
-                  const SizedBox(height: 40,),
+                  const SizedBox(height: 80,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -114,26 +115,21 @@ class _LoginViewState extends State<LoginView> {
                           final password = _password.text;  
                           try{
                               final userCredential = await FirebaseAuth.instance
-                                .signInWithEmailAndPassword(
-                                  email: email,
-                                  password: password,);
+                                .createUserWithEmailAndPassword(
+                                  email: email, 
+                                  password: password);
                               print(userCredential);
                               Navigator.of(context).push
                               (MaterialPageRoute(builder: (BuildContext context){
-                                return const HouseKeeper();
+                                return const LoginView();
                               }));
                           }
                           on FirebaseAuthException catch(e){
-                            if(e.code == "user-not-found"){
-                              const AlertDialog(title: Text("Error"),);
-                            }
-                            else{
-                              print(e.code);
-                            }
+                            print(e.code);
                           }
                         },
                         child: const Text(
-                          'Login',
+                          'Register',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -144,24 +140,16 @@ class _LoginViewState extends State<LoginView> {
                       )
                     )
                   ),
-              
-              TextButton(
-                onPressed: () {
-                },
-                child: const Text(
-                  'Forgot your password'),
-              )
-            
-            ],
-      ); 
+                ],
+              ); 
 
-      default:
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text("Loading.."),
-          ),
-          backgroundColor: Colors.grey[300],
-        );   
+          default:
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text("Loading.."),
+              ),
+              backgroundColor: Colors.grey[300],
+            );   
           }
           
         },
