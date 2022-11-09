@@ -1,5 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:first_app/Classes/rooms.dart';
+
+import '../widget/linked_check.dart';
 
 class RoomsView extends StatefulWidget {
   const RoomsView({Key? key}) : super(key: key);
@@ -8,7 +10,17 @@ class RoomsView extends StatefulWidget {
   State<RoomsView> createState() => _RoomsViewState();
 }
 
+
 class _RoomsViewState extends State<RoomsView> {
+  
+
+  Room room1 = Room(101,1);
+  Room room2 = Room(102,1);
+  Room room3 = Room(103,1);
+  Room room4 = Room(104,1);
+  Room room5 = Room(105,1);
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -19,85 +31,78 @@ class _RoomsViewState extends State<RoomsView> {
       ),
       backgroundColor: Colors.grey[300],
       body:  Column(
-        children: const <Widget> [
-          SizedBox(height: 10,),
-          MyStatefulWidget(),
-          
+        children:  <Widget> [
+          const SizedBox(height: 10,),
+          LinkedLabelCheckbox(
+            label: room1.roomNumber,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: room1.roomCleaned,
+            onPressed: () async {
+                //Buraya linked label checkbox tarzı bir şey yap. Başka sayfaya geççek ve 
+                //housemenden yardım isticek üstte odanın ismini görecek ve odayı temizleyip
+                //temizlemediğini sölicek
+            },
+            onChanged: (bool newValue) {
+              setState(() {
+                room1.roomCleaned = newValue;
+              });
+            },
+          ),
+          LinkedLabelCheckbox(
+            onPressed: () async {
+                
+            },
+            label: room2.roomNumber,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: room2.roomCleaned,
+            onChanged: (bool newValue) {
+              setState(() {
+                room2.roomCleaned = newValue;
+              });
+            },
+          ),
+          LinkedLabelCheckbox(
+            onPressed: () async {
+                
+            },
+            label: room3.roomNumber,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: room3.roomCleaned,
+            onChanged: (bool newValue) {
+              setState(() {
+                room3.roomCleaned = newValue;
+              });
+            },
+          ),
+          LinkedLabelCheckbox(
+            onPressed: () async {
+                
+            },
+            label: room4.roomNumber,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: room4.roomCleaned,
+            onChanged: (bool newValue) {
+              setState(() {
+                room4.roomCleaned = newValue;
+              });
+            },
+          ),
+          LinkedLabelCheckbox(
+            onPressed: () async {
+                
+            },
+            label: room5.roomNumber,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            value: room5.roomCleaned,
+            onChanged: (bool newValue) {
+              setState(() {
+                room5.roomCleaned = newValue;
+              });
+            },
+          ),
         ],
       )    
     );
   }
 }
 
-
-class LinkedLabelCheckbox extends StatelessWidget {
-  const LinkedLabelCheckbox({
-    super.key,
-    required this.label,
-    required this.padding,
-    required this.value,
-    required this.onChanged,
-  });
-
-  final String label;
-  final EdgeInsets padding;
-  final bool value;
-  final ValueChanged<bool> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: padding,
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: RichText(
-              text: TextSpan(
-                text: label,
-                style: const TextStyle(
-                  color: Colors.blueAccent,
-                  decoration: TextDecoration.underline,
-                ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    debugPrint('QR is opening.');
-                  },
-              ),
-            ),
-          ),
-          Checkbox(
-            value: value,
-            onChanged: (bool? newValue) {
-              onChanged(newValue!);
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  bool _isSelected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return LinkedLabelCheckbox(
-      label: 'Press here for QR code',
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      value: _isSelected,
-      onChanged: (bool newValue) {
-        setState(() {
-          _isSelected = newValue;
-        });
-      },
-    );
-  }
-}

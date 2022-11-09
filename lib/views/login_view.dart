@@ -1,3 +1,4 @@
+import 'package:first_app/views/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -150,8 +151,17 @@ class _LoginViewState extends State<LoginView> {
                 },
                 child: const Text(
                   'Forgot your password'),
-              )
-            
+              ),
+              /*TextButton(
+                onPressed: () {
+                  Navigator.of(context).push
+                  (MaterialPageRoute(builder: (BuildContext context){
+                    return const RegisterView();
+                  }));
+                },
+                child: const Text(
+                  'Go to register page.'),
+              )*/
             ],
       ); 
 

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
-import 'views/login_view.dart';
+import 'firebase_options.dart';
 import 'views/housekeeper_view.dart';
 import 'views/register_view.dart';
 
@@ -8,7 +10,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized;
   runApp(const MyApp());
 }
-int count=0;
+
+
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -33,6 +36,25 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const RegisterView();
+    return FutureBuilder(
+        future:Firebase.initializeApp(
+                  options: DefaultFirebaseOptions.android,
+                ),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState){
+            case ConnectionState.done:
+              final user = FirebaseAuth.instance.currentUser;
+              
+              if(user != null){
+                return const HouseKeeper();
+              }
+              else{
+                return const LoginView();
+              }
+            default:
+              return const CircularProgressIndicator();
+          }
+        }
+      );
   }
 }

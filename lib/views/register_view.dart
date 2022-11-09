@@ -45,12 +45,12 @@ class _RegisterViewState extends State<RegisterView> {
             case ConnectionState.done:
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: <Widget>[                  
                   const Text(
                     "Registering Employee",
                     style: TextStyle(
                       fontWeight: FontWeight.bold, 
-                      fontSize: 40),
+                      fontSize: 35),
                     ),
                   const SizedBox(height: 80,),
                   Padding(
@@ -140,6 +140,16 @@ class _RegisterViewState extends State<RegisterView> {
                       )
                     )
                   ),
+                /*TextButton(
+                onPressed: () {
+                  Navigator.of(context).push
+                  (MaterialPageRoute(builder: (BuildContext context){
+                    return const LoginView();
+                  }));
+                },
+                  child: const Text(
+                      'Already registered'),
+                  )*/
                 ],
               ); 
 

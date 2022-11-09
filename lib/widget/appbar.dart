@@ -36,14 +36,6 @@ class NavigationDrawerWidget extends StatelessWidget {
               },
             ),
             buildMenuItem(
-              text: "Facility",
-              icon: Icons.public
-            ),
-            buildMenuItem(
-              text: "Laundry",
-              icon: Icons.local_laundry_service
-            ),
-            buildMenuItem(
               text: "Settings", 
               icon: Icons.settings
             ),
