@@ -4,7 +4,8 @@ import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'views/housekeeper_view.dart';
-import 'views/register_view.dart';
+import 'views/inside_room.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized;
@@ -46,10 +47,10 @@ class FirstPage extends StatelessWidget {
               final user = FirebaseAuth.instance.currentUser;
               
               if(user != null){
-                return const HouseKeeper();
+                return InsideRoom();
               }
               else{
-                return const LoginView();
+                return InsideRoom();
               }
             default:
               return const CircularProgressIndicator();
