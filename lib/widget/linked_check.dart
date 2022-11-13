@@ -1,7 +1,8 @@
 import 'package:first_app/widget/pop_out.dart';
 import 'package:flutter/material.dart';
-
 import '../Classes/rooms.dart';
+
+
 
 class LinkedLabelCheckbox extends StatefulWidget {
 
@@ -28,6 +29,7 @@ class _LinkedLabelCheckboxState extends State<LinkedLabelCheckbox> {
           Expanded(
             child: TextButton(
               onPressed: () async {
+                print(widget.room.roomCleaned);
                 PopOut(context,widget.room);
               },
               child: Text(
