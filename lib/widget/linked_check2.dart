@@ -12,7 +12,7 @@ class LinkedLabelCheckbox2 extends StatelessWidget {
 
   final String label;
   final EdgeInsets padding;
-  final bool value;
+  final bool? value;
   final ValueChanged<bool> onChanged;
 
   @override
@@ -25,7 +25,6 @@ class LinkedLabelCheckbox2 extends StatelessWidget {
             child: Text(
               label,
               style: const TextStyle(
-                //fontWeight: FontWeight.bold,
                 fontSize: 15,
                 color: Colors.blueAccent
               ),

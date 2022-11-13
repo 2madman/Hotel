@@ -1,35 +1,37 @@
+import 'package:first_app/widget/pop_out.dart';
 import 'package:flutter/material.dart';
 
-class LinkedLabelCheckbox extends StatelessWidget {
-  const LinkedLabelCheckbox({
+import '../Classes/rooms.dart';
+
+class LinkedLabelCheckbox extends StatefulWidget {
+
+   const LinkedLabelCheckbox({
     super.key,
-    required this.label,
-    required this.padding,
-    required this.value,
-    required this.onChanged,
-    required this.onPressed,
+    required this.room,
 
   });
 
-  final int label;
-  final EdgeInsets padding;
-  final bool value;
-  final ValueChanged<bool> onChanged;
-  final void Function()? onPressed;
+  final Room room;
+  
+  @override
+  State<LinkedLabelCheckbox> createState() => _LinkedLabelCheckboxState();
+}
 
+class _LinkedLabelCheckboxState extends State<LinkedLabelCheckbox> {
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding,
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: <Widget>[
           Expanded(
             child: TextButton(
               onPressed: () async {
-                
+                PopOut(context,widget.room);
               },
               child: Text(
-                label.toString(),
+                widget.room.roomNumber.toString(),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
@@ -39,9 +41,11 @@ class LinkedLabelCheckbox extends StatelessWidget {
               ),
           ),
           Checkbox(
-            value: value,
+            value: widget.room.roomCleaned,
             onChanged: (bool? newValue) {
-              onChanged(newValue!);
+              setState(() {
+                widget.room.roomCleaned = newValue!;
+              });
             },
           ),
         ],
