@@ -1,9 +1,21 @@
 import 'package:first_app/widget/linked_check2.dart';
 import 'package:flutter/material.dart';
 import '../Classes/rooms.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future <void> PopOut(BuildContext context,Room room )
 {
+
+  CollectionReference users = FirebaseFirestore.instance.collection('Rooms');
+
+    users
+        .doc(room.uid)
+        .update
+              ({
+                'initialCleaning':room.initialCleaning,
+                'roomCleanded': room.roomCleaned,
+              }).then((value) => print('User added'));
+
   String a = room.roomNumber.toString();
   return showDialog(
     context: context,

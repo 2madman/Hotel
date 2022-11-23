@@ -47,7 +47,7 @@ class FirstPage extends StatelessWidget {
               final user = FirebaseAuth.instance.currentUser;
               
               if(user != null){
-                return RegisterView();
+                return HouseKeeper();
               }
               else{
                 return HouseKeeper();

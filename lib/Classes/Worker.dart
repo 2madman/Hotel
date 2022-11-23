@@ -1,10 +1,11 @@
 
-class Workers{
+class Worker{
 
   String name;
   int id;
   String work;
+  String uid;
 
-  Workers(this.name,this.id,this.work);
+  Worker(this.name,this.id,this.work,this.uid);
   
 }

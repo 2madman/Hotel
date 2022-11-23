@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:first_app/Classes/Worker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,16 +19,19 @@ class _RegisterViewState extends State<RegisterView> {
   
   late final TextEditingController _email;
   late final TextEditingController _password;
+  late final TextEditingController _name;
 
   @override
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
+    _name = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
+    _name.dispose();
     _email.dispose();
     _password.dispose();
     super.dispose();
@@ -66,7 +72,29 @@ class _RegisterViewState extends State<RegisterView> {
                         child: TextField(
                           decoration: const InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Id" 
+                            hintText: "Name" 
+                          ),
+                        autocorrect: false,
+                        controller: _name,
+                        ),
+                      )
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border:Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: TextField(
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Email" 
                           ),
                         autocorrect: false,
                         keyboardType: TextInputType.emailAddress,
@@ -100,6 +128,29 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                   ),
                   const SizedBox(height: 10,),
+                  /*Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border:Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: TextField(
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Job" 
+                          ),
+                        autocorrect: false,
+                        keyboardType: TextInputType.emailAddress,
+                        controller: _email,
+                        ),
+                      )
+                    ),
+                  ),*/
+                  const SizedBox(height: 10,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -111,21 +162,25 @@ class _RegisterViewState extends State<RegisterView> {
                       child: Center(
                         child: TextButton(
                         onPressed: () async {
+                          
                           final email = _email.text;
                           final password = _password.text;  
+                          final name = _name.text;
+                          
                           try{
-                              final userCredential = await FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                                  email: email, 
-                                  password: password);
-                              print(userCredential);
+                                await FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                    email: email, 
+                                    password: password
+                                );
+                              
                               Navigator.of(context).push
                               (MaterialPageRoute(builder: (BuildContext context){
                                 return const LoginView();
                               }));
                           }
                           on FirebaseAuthException catch(e){
-                            print(e.code);
+                            log(e.code);
                           }
                         },
                         child: const Text(
@@ -165,5 +220,6 @@ class _RegisterViewState extends State<RegisterView> {
         },
       )
     );
+    
   }
 }

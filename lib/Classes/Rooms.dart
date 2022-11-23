@@ -5,6 +5,7 @@ class Room{
   int floor;
   bool roomCleaned = false;
   bool initialCleaning = false;
-  Room(this.roomNumber,this.floor);
+  String uid;
+  Room(this.roomNumber,this.floor,this.uid);
 
 }
