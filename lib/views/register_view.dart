@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/Classes/Worker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,12 +20,14 @@ class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
   late final TextEditingController _name;
+  late final TextEditingController _id;
 
   @override
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
     _name = TextEditingController();
+    _id = TextEditingController();
     super.initState();
   }
 
@@ -34,9 +36,20 @@ class _RegisterViewState extends State<RegisterView> {
     _name.dispose();
     _email.dispose();
     _password.dispose();
+    _id.dispose();
     super.dispose();
   }
   
+  Future addUserDetails(String name,String email,int id) async{
+
+    await FirebaseFirestore.instance.collection('Users').add({
+      'name': name,
+      'id': id,
+      'email': email,
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +71,7 @@ class _RegisterViewState extends State<RegisterView> {
                       fontWeight: FontWeight.bold, 
                       fontSize: 35),
                     ),
-                  const SizedBox(height: 80,),
+                  const SizedBox(height: 30,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -76,6 +89,29 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                         autocorrect: false,
                         controller: _name,
+                        ),
+                      )
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border:Border.all(color: Colors.white),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: TextField(
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Id" 
+                          ),
+                        autocorrect: false,
+                        keyboardType: TextInputType.emailAddress,
+                        controller: _id,
                         ),
                       )
                     ),
@@ -166,6 +202,7 @@ class _RegisterViewState extends State<RegisterView> {
                           final email = _email.text;
                           final password = _password.text;  
                           final name = _name.text;
+                          final id = _id.text;
                           
                           try{
                                 await FirebaseAuth.instance
@@ -173,12 +210,20 @@ class _RegisterViewState extends State<RegisterView> {
                                     email: email, 
                                     password: password
                                 );
-                              
-                              Navigator.of(context).push
-                              (MaterialPageRoute(builder: (BuildContext context){
-                                return const LoginView();
-                              }));
-                          }
+
+                                addUserDetails(
+                                  name,email,int.parse(id)
+                                );
+
+                                //Worker worker = Worker(name,1,"Housekeeper", "worker 1");
+                                
+
+                                Navigator.of(context).push
+                                (MaterialPageRoute(builder: (BuildContext context){
+                                  return const LoginView();
+                                }));
+                              }
+                          
                           on FirebaseAuthException catch(e){
                             log(e.code);
                           }

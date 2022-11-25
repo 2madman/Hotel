@@ -13,8 +13,8 @@ Future <void> PopOut(BuildContext context,Room room )
         .update
               ({
                 'initialCleaning':room.initialCleaning,
-                'roomCleanded': room.roomCleaned,
-              }).then((value) => print('User added'));
+                'roomCleaned': room.roomCleaned,
+              });
 
   String a = room.roomNumber.toString();
   return showDialog(

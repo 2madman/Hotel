@@ -29,7 +29,6 @@ class _LinkedLabelCheckboxState extends State<LinkedLabelCheckbox> {
           Expanded(
             child: TextButton(
               onPressed: () async {
-                print(widget.room.roomCleaned);
                 PopOut(context,widget.room);
               },
               child: Text(
@@ -42,14 +41,14 @@ class _LinkedLabelCheckboxState extends State<LinkedLabelCheckbox> {
                 ),
               ),
           ),
-          Checkbox(
+          /*Checkbox(
             value: widget.room.roomCleaned,
             onChanged: (bool? newValue) {
               setState(() {
                 widget.room.roomCleaned = newValue!;
               });
             },
-          ),
+          ),*/
         ],
       ),
     );

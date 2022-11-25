@@ -121,7 +121,7 @@ class _LoginViewState extends State<LoginView> {
                               print(userCredential);
                               Navigator.of(context).push
                               (MaterialPageRoute(builder: (BuildContext context){
-                                return const HouseKeeper();
+                                return const HouseKeeperView();
                               }));
                           }
                           on FirebaseAuthException catch(e){

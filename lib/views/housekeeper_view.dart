@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../widget/appbar.dart';
 
-class HouseKeeper extends StatefulWidget {
-  const HouseKeeper({Key? key}) : super(key: key);
+/*class HouseKeeperView extends StatefulWidget {
+  const HouseKeeperView (String s, {Key? key}) : super(key: key);
 
   @override
-  State<HouseKeeper> createState() => _HouseKeeperState();
+  State<HouseKeeperView> createState() => _HouseKeeperViewState();
 }
 
-class _HouseKeeperState extends State<HouseKeeper> {
+class _HouseKeeperState extends State<HouseKeeperView> {
   @override
   Widget build(BuildContext context) {
 
@@ -21,5 +21,26 @@ class _HouseKeeperState extends State<HouseKeeper> {
     );
 
 
+  }
+}*/
+
+
+class HouseKeeperView extends StatefulWidget {
+  const HouseKeeperView({super.key});
+
+  @override
+  State<HouseKeeperView> createState() => _HouseKeeperViewState();
+}
+
+class _HouseKeeperViewState extends State<HouseKeeperView> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("House Keeper"),
+      ),
+      backgroundColor: Colors.grey[300],
+      drawer: NavigationDrawerWidget(),
+    );
   }
 }

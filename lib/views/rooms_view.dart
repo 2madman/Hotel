@@ -11,61 +11,53 @@ class RoomsView extends StatefulWidget {
 }
 
 
-class _RoomsViewState extends State<RoomsView> {
+class _RoomsViewState extends State<RoomsView> {  
 
-
-  Room room1 = Room(101,1,"1");
-  Room room2 = Room(102,1,"2");
-  Room room3 = Room(103,1,"3");
-  Room room4 = Room(104,1,"4");
-  Room room5 = Room(105,1,"5");
-
-  
 
   @override
   Widget build(BuildContext context) {
 
     CollectionReference users = FirebaseFirestore.instance.collection('Rooms');
 
-    users
+    /*users
         .doc(room1.uid)
         .set
               ({
                 'initialCleaning':room1.initialCleaning,
-                'roomCleanded': room1.roomCleaned,
-              }).then((value) => print('User added'));
+                'roomCleaned': room1.roomCleaned,
+              });
     
     users
         .doc(room2.uid)
         .set
               ({
                 'initialCleaning':room2.initialCleaning,
-                'roomCleanded': room2.roomCleaned,
-              }).then((value) => print('User added'));
+                'roomCleaned': room2.roomCleaned,
+              });
 
     users
         .doc(room3.uid)
         .set
               ({
                 'initialCleaning':room3.initialCleaning,
-                'roomCleanded': room3.roomCleaned,
-              }).then((value) => print('User added'));
+                'roomCleaned': room3.roomCleaned,
+              });
 
     users
         .doc(room4.uid)
         .set
               ({
                 'initialCleaning':room4.initialCleaning,
-                'roomCleanded': room4.roomCleaned,
-              }).then((value) => print('User added'));
+                'roomCleaned': room4.roomCleaned,
+              });
 
     users
         .doc(room5.uid)
         .set
               ({
                 'initialCleaning':room5.initialCleaning,
-                'roomCleanded': room5.roomCleaned,
-              }).then((value) => print('User added')); 
+                'roomCleaned': room5.roomCleaned,
+              }); */
 
     return Scaffold(
       appBar: AppBar(
