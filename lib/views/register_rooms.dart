@@ -1,7 +1,5 @@
 import 'package:first_app/Classes/rooms.dart';
 import 'package:flutter/material.dart';
-
-import '../widget/linked_check.dart';
 import '../widget/room_register_check.dart';
 
 class RegisterRoomsView extends StatefulWidget {
@@ -14,6 +12,7 @@ class RegisterRoomsView extends StatefulWidget {
 class _RegisterRoomsViewState extends State<RegisterRoomsView> {
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -21,22 +20,42 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
         backgroundColor: const Color.fromARGB(255, 122, 83, 238), 
       ),
       body:  Column(
-        children:  <Widget> [
-          const SizedBox(height: 10,),
-          LinkedLabelCheckbox3(
-            room: room1,
+        children:[ 
+          const SizedBox(height: 20,),
+          Row(
+            children : [
+              const SizedBox(height: 30,),
+              LinkedLabelCheckbox3(
+                room: room1,
+              ),
+              LinkedLabelCheckbox3(
+                room: room2,
+              ),
+            ],
           ),
-          LinkedLabelCheckbox3(
-            room: room2,
+          const SizedBox(height: 20,),
+          Row(
+            children : [
+              const SizedBox(height: 30,),
+              LinkedLabelCheckbox3(
+                room: room3,
+              ),
+              LinkedLabelCheckbox3(
+                room: room4,
+              ),
+            ],
           ),
-          LinkedLabelCheckbox3(
-            room: room3,
-          ),
-          LinkedLabelCheckbox3(
-            room: room4,
-          ),
-          LinkedLabelCheckbox3(
-            room: room5,
+          const SizedBox(height: 20,),
+          Row(
+            children : [
+              const SizedBox(height: 30,),
+              LinkedLabelCheckbox3(
+                room: room5,
+              ),
+              LinkedLabelCheckbox3(
+                room: room6,
+              ),
+            ],
           ),
           Expanded(
             child: Align(

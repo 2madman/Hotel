@@ -26,10 +26,10 @@ class _LinkedLabelCheckbox3State extends State<LinkedLabelCheckbox3> {
       child: Row(
         children: <Widget>[
           Text(
-            " Room       ${widget.room.roomNumber}",
+            "Room  ${widget.room.roomNumber}",
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 22,
+              fontSize: 21,
               color: Colors.blueAccent
             ),
           ),
