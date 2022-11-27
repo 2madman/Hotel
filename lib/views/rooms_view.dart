@@ -13,11 +13,11 @@ class RoomsView extends StatefulWidget {
 
 class _RoomsViewState extends State<RoomsView> {  
 
-  read_data(){
+  /*read_data(){
 
     DocumentReference documentReference = 
-      FirebaseFirestore.instance
-  }
+      FirebaseFirestore.instance.collection("Rooms").doc(roomCleaned);
+  }*/
 
   @override
   Widget build(BuildContext context) {
