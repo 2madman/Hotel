@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
 import '../widget/linked_check.dart';
@@ -10,54 +11,18 @@ class RoomsView extends StatefulWidget {
   State<RoomsView> createState() => _RoomsViewState();
 }
 
-
 class _RoomsViewState extends State<RoomsView> {  
 
+  read_data(){
+
+    DocumentReference documentReference = 
+      FirebaseFirestore.instance
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    CollectionReference users = FirebaseFirestore.instance.collection('Rooms');
-
-    /*users
-        .doc(room1.uid)
-        .set
-              ({
-                'initialCleaning':room1.initialCleaning,
-                'roomCleaned': room1.roomCleaned,
-              });
     
-    users
-        .doc(room2.uid)
-        .set
-              ({
-                'initialCleaning':room2.initialCleaning,
-                'roomCleaned': room2.roomCleaned,
-              });
-
-    users
-        .doc(room3.uid)
-        .set
-              ({
-                'initialCleaning':room3.initialCleaning,
-                'roomCleaned': room3.roomCleaned,
-              });
-
-    users
-        .doc(room4.uid)
-        .set
-              ({
-                'initialCleaning':room4.initialCleaning,
-                'roomCleaned': room4.roomCleaned,
-              });
-
-    users
-        .doc(room5.uid)
-        .set
-              ({
-                'initialCleaning':room5.initialCleaning,
-                'roomCleaned': room5.roomCleaned,
-              }); */
 
     return Scaffold(
       appBar: AppBar(
@@ -82,6 +47,21 @@ class _RoomsViewState extends State<RoomsView> {
           ),
           LinkedLabelCheckbox(
             room: room5,
+          ),
+          LinkedLabelCheckbox(
+            room: room6,
+          ),
+          LinkedLabelCheckbox(
+            room: room7,
+          ),
+          LinkedLabelCheckbox(
+            room: room8,
+          ),
+          LinkedLabelCheckbox(
+            room: room9,
+          ),
+          LinkedLabelCheckbox(
+            room: room10,
           ),
         ],
       )    

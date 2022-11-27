@@ -6,15 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Future <void> PopOut(BuildContext context,Room room )
 {
 
-  CollectionReference users = FirebaseFirestore.instance.collection('Rooms');
+  CollectionReference rooms = FirebaseFirestore.instance.collection('Rooms');
 
-    users
-        .doc(room.uid)
-        .update
-              ({
-                'initialCleaning':room.initialCleaning,
-                'roomCleaned': room.roomCleaned,
-              });
 
   String a = room.roomNumber.toString();
   return showDialog(
@@ -37,6 +30,12 @@ Future <void> PopOut(BuildContext context,Room room )
                         onChanged: (bool newValue) {
                           setState(() {
                             room.initialCleaning = newValue;
+                            rooms
+                              .doc(room.uid)
+                              .update
+                                ({
+                                  'initialCleaning':room.initialCleaning,
+                                });
                           });
                         },
                       ),
@@ -47,6 +46,12 @@ Future <void> PopOut(BuildContext context,Room room )
                         onChanged: (bool newValue) {
                           setState(() {
                             room.roomCleaned = newValue;
+                            rooms
+                            .doc(room.uid)
+                            .update
+                                  ({
+                                    'roomCleaned': room.roomCleaned,
+                                  });
                           });
                         },
                       ),

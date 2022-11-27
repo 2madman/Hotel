@@ -1,6 +1,8 @@
 import 'package:first_app/widget/pop_out.dart';
 import 'package:flutter/material.dart';
 import '../Classes/rooms.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 
 class LinkedLabelCheckbox3 extends StatefulWidget {
@@ -19,6 +21,7 @@ class LinkedLabelCheckbox3 extends StatefulWidget {
 
 class _LinkedLabelCheckbox3State extends State<LinkedLabelCheckbox3> {
   
+  CollectionReference rooms = FirebaseFirestore.instance.collection('Rooms');
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,9 +49,15 @@ class _LinkedLabelCheckbox3State extends State<LinkedLabelCheckbox3> {
       onChanged: (bool? newValue) {
         setState(() {
           room.someoneCleaning = newValue!;
+          rooms
+            .doc(room.uid)
+            .update
+              ({
+                'someoneCleaning':room.someoneCleaning,
+              });
         });
       },
     );
-
   }
+
 }

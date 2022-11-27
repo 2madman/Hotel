@@ -12,7 +12,6 @@ class RegisterRoomsView extends StatefulWidget {
 class _RegisterRoomsViewState extends State<RegisterRoomsView> {
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -57,6 +56,30 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
               ),
             ],
           ),
+          const SizedBox(height: 20,),
+          Row(
+            children : [
+              const SizedBox(height: 30,),
+              LinkedLabelCheckbox3(
+                room: room7,
+              ),
+              LinkedLabelCheckbox3(
+                room: room8,
+              ),
+            ],
+          ),
+          const SizedBox(height: 20,),
+          Row(
+            children : [
+              const SizedBox(height: 30,),
+              LinkedLabelCheckbox3(
+                room: room9,
+              ),
+              LinkedLabelCheckbox3(
+                room: room10,
+              ),
+            ],
+          ),
           Expanded(
             child: Align(
               alignment: FractionalOffset.bottomCenter,
@@ -75,7 +98,6 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
           ),  
         ],
       ),
-      
     );
   }
 }

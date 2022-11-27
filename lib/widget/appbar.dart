@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_app/views/rooms_view.dart';
 
+import '../views/register_rooms.dart';
+
 class NavigationDrawerWidget extends StatelessWidget {
 
   final padding = EdgeInsets.symmetric(horizontal:20);
@@ -30,8 +32,18 @@ class NavigationDrawerWidget extends StatelessWidget {
               icon: Icons.meeting_room,
               onClicked: (){
                  Navigator.of(context).push
-                (MaterialPageRoute(builder: (BuildContext context){
+                  (MaterialPageRoute(builder: (BuildContext context){
                   return const RoomsView();
+                }));
+              },
+            ),
+            buildMenuItem(
+              text: "Register Rooms", 
+              icon: Icons.logout,
+              onClicked: (){
+                 Navigator.of(context).push
+                  (MaterialPageRoute(builder: (BuildContext context){
+                  return const RegisterRoomsView();
                 }));
               },
             ),
