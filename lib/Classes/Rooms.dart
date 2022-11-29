@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../Backend/room_backend.dart';
+
 var liste = [];
-List<String> docIDs = [];
 
 class Room{
 
@@ -13,6 +15,8 @@ class Room{
 
 }
 
+
+
 Room room1 = Room(101,1,"1");
 Room room2 = Room(102,1,"2");
 Room room3 = Room(103,1,"3");
@@ -24,21 +28,6 @@ Room room8 = Room(108,1,"8");
 Room room9 = Room(109,1,"9");
 Room room10 = Room(110,1,"10");
 
-
-void main(){
-  
-  liste.add(room1);
-  liste.add(room2);
-  liste.add(room3);
-  liste.add(room4);
-  liste.add(room5);
-  liste.add(room6);
-  liste.add(room7);
-  liste.add(room8);
-  liste.add(room9);
-  liste.add(room10);
-
-}
 
 
 
