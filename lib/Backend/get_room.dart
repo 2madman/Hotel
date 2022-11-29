@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 
 import '../Classes/rooms.dart';
 
+
 class GetRoomCleaned extends StatelessWidget {
+  
   
   final String documentId;
   GetRoomCleaned({required this.documentId});
 
   @override
   Widget build(BuildContext context) {
-    
+
     CollectionReference users = FirebaseFirestore.instance.collection('Rooms');
 
     return FutureBuilder<DocumentSnapshot>(
@@ -20,7 +22,7 @@ class GetRoomCleaned extends StatelessWidget {
         if(snapshot.connectionState == ConnectionState.done){
           Map<String, dynamic> data = 
             snapshot.data!.data() as Map<String, dynamic>;
-                    
+
           addListe();
 
           for(int i=0;i<liste.length;i++){

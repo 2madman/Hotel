@@ -14,58 +14,67 @@ class RoomsView extends StatefulWidget {
 class _RoomsViewState extends State<RoomsView> {  
 
   Future<void> _refresh(){
+    CollectionReference users = FirebaseFirestore.instance.collection('Rooms');
 
+    /*return FutureBuilder<DocumentSnapshot>(
+      future: users.doc(documentId).get(),
+      builder: ((context, snapshot){
+        if(snapshot.connectionState == ConnectionState.done){
+          Map<String, dynamic> data = 
+            snapshot.data!.data() as Map<String, dynamic>;
+
+          addListe();
+
+          for(int i=0;i<liste.length;i++){
+            if(liste[i].uid == data['uid']){
+              liste[i].roomCleaned = data['roomCleaned'];
+              liste[i].initialCleaning = data['initialCleaning'];
+              liste[i].someoneCleaning = data['someoneCleaning'];
+            }
+
+          }
+        }
+        return const Text('');
+      }),      
+    );*/
+    
     return Future.delayed(
-      Duration(seconds: 1),
+      const Duration(seconds: 1),
     );
+  }
+
+  Widget ListViewBuilder(List liste){
+
+    return 
+      Expanded(
+        child: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context,index){
+            return LinkedLabelCheckbox(
+              room: liste[index],
+            );
+          },
+        ),
+      );
 
   }
 
-
   @override
   Widget build(BuildContext context) {
-
+    
+    addListe();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Rooms"),
         backgroundColor: const Color.fromARGB(255, 122, 83, 238), 
       ),
       backgroundColor: Colors.grey[300],
-      body:  Column(
-        children:  <Widget> [
-          const SizedBox(height: 10,),
-          LinkedLabelCheckbox(
-            room: room1,
-          ),
-          LinkedLabelCheckbox(
-            room: room2,
-          ),
-          LinkedLabelCheckbox(
-            room: room3,
-          ),
-          LinkedLabelCheckbox(
-            room: room4,
-          ),
-          LinkedLabelCheckbox(
-            room: room5,
-          ),
-          LinkedLabelCheckbox(
-            room: room6,
-          ),
-          LinkedLabelCheckbox(
-            room: room7,
-          ),
-          LinkedLabelCheckbox(
-            room: room8,
-          ),
-          LinkedLabelCheckbox(
-            room: room9,
-          ),
-          LinkedLabelCheckbox(
-            room: room10,
-          ),
-        ],
-      )    
+      body: 
+        RefreshIndicator(
+          backgroundColor: Colors.grey[400],
+          onRefresh: _refresh,
+          child: ListViewBuilder(liste),
+        ),  
     );
   }
 }

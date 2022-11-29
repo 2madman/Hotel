@@ -9,7 +9,6 @@ Future getDocId() async {
 
     await FirebaseFirestore.instance.collection('Rooms').get().then(
     (snapshot) => snapshot.docs.forEach((element) {
-      print(element.reference);
       docIDs.add(element.reference.id);  
     }));
   

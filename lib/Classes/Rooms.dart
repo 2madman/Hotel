@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import '../Backend/room_backend.dart';
-
 var liste = [];
 
 class Room{
