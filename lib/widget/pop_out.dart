@@ -35,6 +35,7 @@ Future <void> PopOut(BuildContext context,Room room )
                               .update
                                 ({
                                   'initialCleaning':room.initialCleaning,
+                                  'uid': room.uid,
                                 });
                           });
                         },

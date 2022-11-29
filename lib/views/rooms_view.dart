@@ -13,6 +13,15 @@ class RoomsView extends StatefulWidget {
 
 class _RoomsViewState extends State<RoomsView> {  
 
+  Future<void> _refresh(){
+
+    return Future.delayed(
+      Duration(seconds: 1),
+    );
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
 

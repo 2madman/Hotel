@@ -28,6 +28,20 @@ Room room8 = Room(108,1,"8");
 Room room9 = Room(109,1,"9");
 Room room10 = Room(110,1,"10");
 
+void addListe(){
+
+  liste.add(room1);
+  liste.add(room2);
+  liste.add(room3);
+  liste.add(room4);
+  liste.add(room5);
+  liste.add(room6);
+  liste.add(room7);
+  liste.add(room8);
+  liste.add(room9);
+  liste.add(room10);
+  
+}
 
 
 
