@@ -1,4 +1,4 @@
-import 'package:first_app/Classes/Worker.dart';
+import 'package:first_app/Classes/worker.dart';
 
 class HouseKeeper extends Worker{
   

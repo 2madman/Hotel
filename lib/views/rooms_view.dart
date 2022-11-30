@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
 import '../widget/linked_check.dart';
@@ -13,37 +12,34 @@ class RoomsView extends StatefulWidget {
 
 class _RoomsViewState extends State<RoomsView> {  
 
-  Future<void> _refresh(){
-    CollectionReference users = FirebaseFirestore.instance.collection('Rooms');
+  List <String> docIDs = [];
 
-    /*return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(documentId).get(),
-      builder: ((context, snapshot){
-        if(snapshot.connectionState == ConnectionState.done){
-          Map<String, dynamic> data = 
-            snapshot.data!.data() as Map<String, dynamic>;
+  Future refresh() async {
 
-          addListe();
-
-          for(int i=0;i<liste.length;i++){
-            if(liste[i].uid == data['uid']){
-              liste[i].roomCleaned = data['roomCleaned'];
-              liste[i].initialCleaning = data['initialCleaning'];
-              liste[i].someoneCleaning = data['someoneCleaning'];
-            }
-
-          }
+    await FirebaseFirestore.instance.collection('Rooms').get().then(
+    (snapshot) => snapshot.docs.forEach((element) {
+      docIDs.add(element.reference.id);  
+      
+      for(int i=0;i<10;i++){
+        if(liste[i].uid == element.data()['uid']){
+          liste[i].roomCleaned = element.data()['roomCleaned'];
+          liste[i].initialCleaning = element.data()['initialCleaning'];
+          liste[i].someoneCleaning = element.data()['someoneCleaning'];
         }
-        return const Text('');
-      }),      
-    );*/
+      }
+    }));
+  }
+
+
+  Future<void> _refresh(){
     
+    refresh();
     return Future.delayed(
       const Duration(seconds: 1),
     );
   }
 
-  Widget ListViewBuilder(List liste){
+  Widget listViewBuilder(List liste){
 
     return 
       Expanded(
@@ -73,7 +69,7 @@ class _RoomsViewState extends State<RoomsView> {
         RefreshIndicator(
           backgroundColor: Colors.grey[400],
           onRefresh: _refresh,
-          child: ListViewBuilder(liste),
+          child: listViewBuilder(liste),
         ),  
     );
   }

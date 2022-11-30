@@ -1,4 +1,5 @@
-import 'package:first_app/views/register_view.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -118,7 +119,6 @@ class _LoginViewState extends State<LoginView> {
                                 .signInWithEmailAndPassword(
                                   email: email,
                                   password: password,);
-                              print(userCredential);
                               Navigator.of(context).push
                               (MaterialPageRoute(builder: (BuildContext context){
                                 return const HouseKeeperView();
@@ -129,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
                               const AlertDialog(title: Text("Error"),);
                             }
                             else{
-                              print(e.code);
+                              log(e.code);
                             }
                           }
                         },

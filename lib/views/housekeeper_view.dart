@@ -7,12 +7,12 @@ List <String> docIDs = [];
 
 Future getDocId() async {
 
-    await FirebaseFirestore.instance.collection('Rooms').get().then(
-    (snapshot) => snapshot.docs.forEach((element) {
-      docIDs.add(element.reference.id);  
-    }));
-  
-  }
+  await FirebaseFirestore.instance.collection('Rooms').get().then(
+  (snapshot) => snapshot.docs.forEach((element) {
+    docIDs.add(element.reference.id);  
+  }));
+
+}
 
 
 class HouseKeeperView extends StatefulWidget {

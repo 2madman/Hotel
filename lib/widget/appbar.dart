@@ -7,7 +7,7 @@ import '../views/register_rooms.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
 
-  final padding = EdgeInsets.symmetric(horizontal:20);
+  final padding = const EdgeInsets.symmetric(horizontal:20);
 
   @override
   Widget build(BuildContext context) {
