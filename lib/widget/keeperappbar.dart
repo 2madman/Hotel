@@ -38,7 +38,7 @@ void nameApply(){
 }
 
 
-class NavigationDrawerWidget extends StatelessWidget {
+class HouseAppBar extends StatelessWidget {
 
 
   @override
@@ -70,16 +70,6 @@ class NavigationDrawerWidget extends StatelessWidget {
               },
             ),
             buildMenuItem(
-              text: "Register Rooms", 
-              icon: Icons.logout,
-              onClicked: (){
-                 Navigator.of(context).push
-                  (MaterialPageRoute(builder: (BuildContext context){
-                  return const RegisterRoomsView();
-                }));
-              },
-            ),
-            buildMenuItem(
               text: "Settings", 
               icon: Icons.settings
             ),
@@ -87,7 +77,7 @@ class NavigationDrawerWidget extends StatelessWidget {
               text: "Log Out", 
               icon: Icons.logout,
               onClicked: (){
-                 showAlertDialog(context);
+                showAlertDialog(context);
               },
             ),
           ],

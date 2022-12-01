@@ -1,12 +1,11 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:first_app/views/login_view.dart';
+import 'package:first_app/views/manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:first_app/views/rooms_view.dart';
-
+import '../views/manager_rooms_view.dart';
 import '../views/register_rooms.dart';
+import 'appbar.dart';
 
 
 List <String> docIDs = [];
@@ -38,8 +37,7 @@ void nameApply(){
 }
 
 
-class NavigationDrawerWidget extends StatelessWidget {
-
+class ManagerAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -60,12 +58,22 @@ class NavigationDrawerWidget extends StatelessWidget {
             ),
             const SizedBox(height: 15,),
             buildMenuItem(
+              text: "Home Page",
+              icon: Icons.home,
+              onClicked: (){
+                 Navigator.of(context).push
+                  (MaterialPageRoute(builder: (BuildContext context){
+                  return const ManagerView();
+                }));
+              },
+            ),
+            buildMenuItem(
               text: "Rooms",
               icon: Icons.meeting_room,
               onClicked: (){
                  Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
-                  return const RoomsView();
+                  return const ManagerRoomsView();
                 }));
               },
             ),
@@ -97,56 +105,3 @@ class NavigationDrawerWidget extends StatelessWidget {
   }
 }
 
-showAlertDialog(BuildContext context) {
-
-  // set up the buttons
-  Widget cancelButton = TextButton(
-    child: const Text("Cancel"),
-    onPressed:  () {
-      Navigator.of(context, rootNavigator: true).pop('dialog');
-    },
-  );
-  Widget continueButton = TextButton(
-    child: const Text("Log Out"),
-    onPressed: () async {
-      await FirebaseAuth.instance.signOut();
-      Navigator.of(context).push
-      (MaterialPageRoute(builder: (BuildContext context){
-        return const LoginView();
-      }));
-    },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: const Text("Log out?"),
-    content: const Text("Are you sure you want to sign out?"),
-    actions: [
-      cancelButton,
-      continueButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
-}
-
-Widget buildMenuItem({
-  required String text,
-  required IconData icon,
-  VoidCallback? onClicked,
-}) {
-  const color = Colors.white;
-
-  return ListTile(
-    leading: Icon(icon, color: color),
-    title: Text(text, style: const TextStyle(color:color)),
-    onTap: onClicked,
-  );
-
-}

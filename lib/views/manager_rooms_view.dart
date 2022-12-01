@@ -1,17 +1,17 @@
-import 'package:first_app/widget/keeperappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
-import '../widget/linked_check.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../widget/manager_rooms_check.dart';
+import '../widget/managerappbar.dart';
 
-class RoomsView extends StatefulWidget {
-  const RoomsView({Key? key}) : super(key: key);
+class ManagerRoomsView extends StatefulWidget {
+  const ManagerRoomsView({Key? key}) : super(key: key);
 
   @override
-  State<RoomsView> createState() => _RoomsViewState();
+  State<ManagerRoomsView> createState() => _ManagerRoomsViewState();
 }
 
-class _RoomsViewState extends State<RoomsView> {  
+class _ManagerRoomsViewState extends State<ManagerRoomsView> {  
 
   List <String> docIDs = [];
 
@@ -46,7 +46,7 @@ class _RoomsViewState extends State<RoomsView> {
         child: ListView.builder(
           itemCount: 10,
           itemBuilder: (context,index){
-            return LinkedLabelCheckbox(
+            return ManagerCheckbox(
               room: liste[index],
             );
           },
@@ -65,7 +65,7 @@ class _RoomsViewState extends State<RoomsView> {
         title: const Text("Rooms"),
         backgroundColor: const Color.fromARGB(255, 122, 83, 238), 
       ),
-      drawer: HouseAppBar(),
+      drawer: ManagerAppBar(),
       backgroundColor: Colors.grey[300],
       body: 
         RefreshIndicator(

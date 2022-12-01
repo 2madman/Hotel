@@ -42,7 +42,6 @@ class _LoginViewState extends State<LoginView> {
                 ),
         builder: (context, snapshot) {
           switch (snapshot.connectionState){
-            
             case ConnectionState.done:
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +66,7 @@ class _LoginViewState extends State<LoginView> {
                         child: TextField(
                           decoration: const InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Id" 
+                            hintText: "Email" 
                           ),
                         autocorrect: false,
                         keyboardType: TextInputType.emailAddress,
@@ -76,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
                       )
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 5,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(

@@ -1,12 +1,10 @@
-import 'package:first_app/widget/pop_out_housekeeper.dart';
+import 'package:first_app/widget/pop_out_manager.dart';
 import 'package:flutter/material.dart';
 import '../Classes/rooms.dart';
 
+class ManagerCheckbox extends StatefulWidget {
 
-
-class LinkedLabelCheckbox extends StatefulWidget {
-
-   const LinkedLabelCheckbox({
+   const ManagerCheckbox({
     super.key,
     required this.room,
 
@@ -15,10 +13,10 @@ class LinkedLabelCheckbox extends StatefulWidget {
   final Room room;
   
   @override
-  State<LinkedLabelCheckbox> createState() => _LinkedLabelCheckboxState();
+  State<ManagerCheckbox> createState() => _ManagerCheckboxState();
 }
 
-class _LinkedLabelCheckboxState extends State<LinkedLabelCheckbox> {
+class _ManagerCheckboxState extends State<ManagerCheckbox> {
   
   @override
   Widget build(BuildContext context) {
@@ -29,7 +27,7 @@ class _LinkedLabelCheckboxState extends State<LinkedLabelCheckbox> {
           Expanded(
             child: TextButton(
               onPressed: () async {
-                PopOut(context,widget.room);
+                PopOutManager(context,widget.room);
               },
               child: Text(
                 widget.room.roomNumber.toString(),

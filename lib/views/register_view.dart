@@ -21,6 +21,8 @@ class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _name;
   late final TextEditingController _id;
 
+  List<String> jobs =["Housekeeper","Housemen","Supervisor"];
+
   @override
   void initState() {
     _email = TextEditingController();
@@ -92,7 +94,7 @@ class _RegisterViewState extends State<RegisterView> {
                       )
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 5,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -109,13 +111,12 @@ class _RegisterViewState extends State<RegisterView> {
                             hintText: "Id" 
                           ),
                         autocorrect: false,
-                        keyboardType: TextInputType.emailAddress,
                         controller: _id,
                         ),
                       )
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 5,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -138,7 +139,7 @@ class _RegisterViewState extends State<RegisterView> {
                       )
                     ),
                   ),
-                  const SizedBox(height: 10,),
+                  const SizedBox(height: 5,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -159,11 +160,11 @@ class _RegisterViewState extends State<RegisterView> {
                           enableSuggestions: false,
                           autocorrect: false,
                         ),
-                      )
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 10,),
-                  /*Padding(
+                  /*const SizedBox(height: 5,),
+                  Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
                       decoration: BoxDecoration(
@@ -173,18 +174,14 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20.0),
-                        child: TextField(
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Job" 
-                          ),
-                        autocorrect: false,
-                        keyboardType: TextInputType.emailAddress,
-                        controller: _email,
+                        child: TextButton(
+                          child: const Text("Job"),
+                          onPressed: () {},
                         ),
                       )
                     ),
                   ),*/
+                  //useri backende kaydet,sonra emailini karşılaştırıp ordan işini bul.
                   const SizedBox(height: 10,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -213,9 +210,6 @@ class _RegisterViewState extends State<RegisterView> {
                                 addUserDetails(
                                   name,email,int.parse(id)
                                 );
-
-                                //Worker worker = Worker(name,1,"Housekeeper", "worker 1");
-                                
 
                                 Navigator.of(context).push
                                 (MaterialPageRoute(builder: (BuildContext context){
