@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:first_app/views/housekeeper_view.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:first_app/views/manager_view.dart';
+import 'package:first_app/views/register_view.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
-import 'views/housekeeper_view.dart';
-import 'views/register_view.dart';
 
 void main () async{
 
@@ -50,10 +50,10 @@ class FirstPage extends StatelessWidget {
             final user = FirebaseAuth.instance.currentUser;
             
             if(user != null){
-              return const ManagerView();
+              return const  ManagerView();
             }
             else{
-              return const LoginView();
+              return const RegisterView();
             }
           default:
             return const CircularProgressIndicator();

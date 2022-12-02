@@ -1,49 +1,16 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_app/views/rooms_view.dart';
+import 'managerappbar.dart';
 
-import '../views/register_rooms.dart';
-
-
-List <String> docIDs = [];
 String name="";
-Future getDocId() async {
-
-  await FirebaseFirestore.instance.collection('Users').get().then(
-  (snapshot) => snapshot.docs.forEach((element) {
-    docIDs.add(element.data()['email']);  
-    docIDs.add(element.data()['name']);  
-  }));
-
-}
-
-void nameApply(){
-  getDocId();
-  final user = FirebaseAuth.instance.currentUser;
-
-  try{
-    for(int i=0;i<docIDs.length;i++){
-      if(user!.email.toString() == docIDs[i]){
-        name = docIDs[i+1].toString();
-        break;
-      }
-    }
-  }catch(e){
-    log(e.toString());
-  }
-}
-
 
 class HouseAppBar extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
-    nameApply();
+    name = nameApply()!;
     return Drawer(
       child: Material(
         color: const Color.fromARGB(255, 122, 83, 238),

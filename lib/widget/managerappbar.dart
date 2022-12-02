@@ -7,33 +7,24 @@ import '../views/manager_rooms_view.dart';
 import '../views/register_rooms.dart';
 import 'appbar.dart';
 
-
-List <String> docIDs = [];
 String name="";
-Future getDocId() async {
 
-  await FirebaseFirestore.instance.collection('Users').get().then(
-  (snapshot) => snapshot.docs.forEach((element) {
-    docIDs.add(element.data()['email']);  
-    docIDs.add(element.data()['name']);  
-  }));
+String? nameApply(){
 
-}
-
-void nameApply(){
-  getDocId();
-  final user = FirebaseAuth.instance.currentUser;
+  final user = FirebaseAuth.instance.currentUser;  
 
   try{
-    for(int i=0;i<docIDs.length;i++){
-      if(user!.email.toString() == docIDs[i]){
-        name = docIDs[i+1].toString();
-        break;
-      }
+  for(int i=0;i<emailStore.length;i++){
+    log(emailStore.length.toString());
+    if(user!.email.toString() == emailStore[i]){
+      name = nameStore[i].toString();
+      return name;
     }
+  }
   }catch(e){
     log(e.toString());
   }
+  return null;
 }
 
 
@@ -41,7 +32,7 @@ class ManagerAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    nameApply();
+    name = nameApply()!;
     return Drawer(
       child: Material(
         color: const Color.fromARGB(255, 122, 83, 238),

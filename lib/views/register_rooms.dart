@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/Classes/rooms.dart';
+import 'package:first_app/widget/pop_out_housekeeper.dart';
 import 'package:flutter/material.dart';
 import '../widget/room_register_check.dart';
+import '../widget/user_popout.dart';
 
 class RegisterRoomsView extends StatefulWidget {
   const RegisterRoomsView({super.key});
@@ -10,8 +13,11 @@ class RegisterRoomsView extends StatefulWidget {
 }
 
 class _RegisterRoomsViewState extends State<RegisterRoomsView> {
+  
+
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -84,7 +90,9 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
             child: Align(
               alignment: FractionalOffset.bottomCenter,
               child: TextButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  UserPopOut(context)
+                },
                 child: const Text(
                   "Assign",
                   style: TextStyle(

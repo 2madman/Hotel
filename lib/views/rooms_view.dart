@@ -43,16 +43,15 @@ class _RoomsViewState extends State<RoomsView> {
   Widget listViewBuilder(List liste){
 
     return Expanded(
-        child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (context,index){
-            return LinkedLabelCheckbox(
-              room: liste[index],
-            );
-          },
-        ),
-      );
-
+      child: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context,index){
+          return LinkedLabelCheckbox(
+            room: liste[index],
+          );
+        },
+      ),
+    );
   }
 
   @override

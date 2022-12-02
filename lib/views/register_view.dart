@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
 import './login_view.dart';
 
-
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
 
@@ -48,6 +47,7 @@ class _RegisterViewState extends State<RegisterView> {
       'id': id,
       'email': email,
     });
+  
   }
 
 
