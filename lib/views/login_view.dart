@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
-import './housekeeper_view.dart';
+import 'housekeeper/housekeeper_view.dart';
+import 'manager/manager_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -120,7 +121,7 @@ class _LoginViewState extends State<LoginView> {
                                   password: password,);
                               Navigator.of(context).push
                               (MaterialPageRoute(builder: (BuildContext context){
-                                return const HouseKeeperView();
+                                return const ManagerView();
                               }));
                           }
                           on FirebaseAuthException catch(e){

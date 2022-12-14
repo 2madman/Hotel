@@ -1,21 +1,19 @@
 import 'dart:developer';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:first_app/views/manager_view.dart';
+import 'package:first_app/views/manager/manager_rooms_view.dart';
+import 'package:first_app/views/manager/manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../views/manager_rooms_view.dart';
-import '../views/register_rooms.dart';
-import 'appbar.dart';
+import '../../views/manager/register_rooms.dart';
+import '../../views/manager/register_view.dart';
+import '../appbar.dart';
 
-String name="";
+String ?name="";
 
 String? nameApply(){
 
   final user = FirebaseAuth.instance.currentUser;  
-
   try{
   for(int i=0;i<emailStore.length;i++){
-    log(emailStore.length.toString());
     if(user!.email.toString() == emailStore[i]){
       name = nameStore[i].toString();
       return name;
@@ -32,7 +30,7 @@ class ManagerAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    name = nameApply()!;
+    name = nameApply();
     return Drawer(
       child: Material(
         color: const Color.fromARGB(255, 122, 83, 238),
@@ -48,7 +46,7 @@ class ManagerAppBar extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15,),
-            buildMenuItem(
+            /*buildMenuItem(
               text: "Home Page",
               icon: Icons.home,
               onClicked: (){
@@ -57,7 +55,7 @@ class ManagerAppBar extends StatelessWidget {
                   return const ManagerView();
                 }));
               },
-            ),
+            ),*/
             buildMenuItem(
               text: "Rooms",
               icon: Icons.meeting_room,
@@ -70,11 +68,21 @@ class ManagerAppBar extends StatelessWidget {
             ),
             buildMenuItem(
               text: "Register Rooms", 
-              icon: Icons.logout,
+              icon: Icons.assignment_ind_rounded,
               onClicked: (){
                  Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
                   return const RegisterRoomsView();
+                }));
+              },
+            ),
+            buildMenuItem(
+              text: "Register New Employee", 
+              icon: Icons.add_circle,
+              onClicked: (){
+                 Navigator.of(context).push
+                  (MaterialPageRoute(builder: (BuildContext context){
+                  return const RegisterView();
                 }));
               },
             ),

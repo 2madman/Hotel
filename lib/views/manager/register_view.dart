@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
-import './login_view.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -210,11 +209,6 @@ class _RegisterViewState extends State<RegisterView> {
                                 addUserDetails(
                                   name,email,int.parse(id)
                                 );
-
-                                Navigator.of(context).push
-                                (MaterialPageRoute(builder: (BuildContext context){
-                                  return const LoginView();
-                                }));
                               }
                           
                           on FirebaseAuthException catch(e){
@@ -228,7 +222,7 @@ class _RegisterViewState extends State<RegisterView> {
                             fontSize: 20,
                             color: Colors.white
                           ),
-                          ),
+                        ),
                         ),
                       )
                     )

@@ -1,12 +1,12 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:first_app/views/rooms_view.dart';
+import 'package:first_app/views/housekeeper/rooms_view.dart';
 
-import '../views/register_rooms.dart';
+import '../views/manager/register_rooms.dart';
+
 
 
 List <String> docIDs = [];

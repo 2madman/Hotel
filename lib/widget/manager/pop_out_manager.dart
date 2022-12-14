@@ -1,6 +1,6 @@
 import 'package:first_app/widget/linked_check2.dart';
 import 'package:flutter/material.dart';
-import '../Classes/rooms.dart';
+import '../../Classes/rooms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future <void> PopOutManager(BuildContext context,Room room )

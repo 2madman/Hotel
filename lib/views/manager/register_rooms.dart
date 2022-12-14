@@ -1,9 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/Classes/rooms.dart';
-import 'package:first_app/widget/pop_out_housekeeper.dart';
+import 'package:first_app/widget/manager/room_register_check.dart';
 import 'package:flutter/material.dart';
-import '../widget/room_register_check.dart';
-import '../widget/user_popout.dart';
+
+import '../../widget/manager/assign_popout.dart';
 
 class RegisterRoomsView extends StatefulWidget {
   const RegisterRoomsView({super.key});

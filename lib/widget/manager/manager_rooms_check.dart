@@ -1,6 +1,6 @@
-import 'package:first_app/widget/pop_out_manager.dart';
+import 'package:first_app/widget/manager/pop_out_manager.dart';
 import 'package:flutter/material.dart';
-import '../Classes/rooms.dart';
+import '../../Classes/rooms.dart';
 
 class ManagerCheckbox extends StatefulWidget {
 

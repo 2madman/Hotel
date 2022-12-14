@@ -1,7 +1,7 @@
 import 'package:first_app/widget/keeperappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
-import '../widget/linked_check.dart';
+import '../../widget/linked_check.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RoomsView extends StatefulWidget {

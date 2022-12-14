@@ -1,6 +1,7 @@
 import 'package:first_app/widget/linked_check2.dart';
 import 'package:flutter/material.dart';
-import '../views/manager_view.dart';
+
+import '../../views/manager/manager_view.dart';
 
 Widget listViewBuilder(List liste){
   var value = false;
@@ -46,7 +47,7 @@ Future <void> UserPopOut(BuildContext context)
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       LinkedLabelCheckbox2(
-                        label: nameStore[0],
+                        label: nameStore[1],
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         value: valueg,
                         onChanged: (bool newValue) {
@@ -56,7 +57,7 @@ Future <void> UserPopOut(BuildContext context)
                         },
                       ),
                       LinkedLabelCheckbox2(
-                        label: nameStore[1],
+                        label: nameStore[2],
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         value: valuee,
                         onChanged: (bool newValue) {

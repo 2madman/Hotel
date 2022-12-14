@@ -27,16 +27,18 @@ Room room10 = Room(110,1,"10");
 
 void addListe(){
 
-  liste.add(room1);
-  liste.add(room2);
-  liste.add(room3);
-  liste.add(room4);
-  liste.add(room5);
-  liste.add(room6);
-  liste.add(room7);
-  liste.add(room8);
-  liste.add(room9);
-  liste.add(room10);
+  if(liste.length<10){
+    liste.add(room1);
+    liste.add(room2);
+    liste.add(room3);
+    liste.add(room4);
+    liste.add(room5);
+    liste.add(room6);
+    liste.add(room7);
+    liste.add(room8);
+    liste.add(room9);
+    liste.add(room10);
+  }
   
 }
 
