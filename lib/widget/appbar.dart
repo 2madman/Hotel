@@ -4,24 +4,23 @@ import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_app/views/housekeeper/rooms_view.dart';
-
 import '../views/manager/register_rooms.dart';
-
-
 
 List <String> docIDs = [];
 String name="";
+
 Future getDocId() async {
 
   await FirebaseFirestore.instance.collection('Users').get().then(
   (snapshot) => snapshot.docs.forEach((element) {
     docIDs.add(element.data()['email']);  
-    docIDs.add(element.data()['name']);  
+    docIDs.add(element.data()['name']);
+      
   }));
 
 }
 
-void nameApply(){
+String nameApply(){
   getDocId();
   final user = FirebaseAuth.instance.currentUser;
 
@@ -29,12 +28,14 @@ void nameApply(){
     for(int i=0;i<docIDs.length;i++){
       if(user!.email.toString() == docIDs[i]){
         name = docIDs[i+1].toString();
-        break;
+        return docIDs[i+1].toString();
       }
     }
   }catch(e){
     log(e.toString());
+    
   }
+  return "null";
 }
 
 

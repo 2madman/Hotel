@@ -2,7 +2,7 @@ import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_app/views/housekeeper/rooms_view.dart';
-import 'manager/managerappbar.dart';
+import '../manager/managerappbar.dart';
 
 String name="";
 
@@ -10,7 +10,7 @@ class HouseAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    name = nameApply()!;
+    
     return Drawer(
       child: Material(
         color: const Color.fromARGB(255, 122, 83, 238),

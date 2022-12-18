@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
 
+import 'manager_view.dart';
+
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
 
@@ -39,14 +41,20 @@ class _RegisterViewState extends State<RegisterView> {
     super.dispose();
   }
   
-  Future addUserDetails(String name,String email,int id) async{
+  Future addUserDetails(String name,String email,String id) async{
 
-    await FirebaseFirestore.instance.collection('Users').add({
-      'name': name,
-      'id': id,
-      'email': email,
-    });
+    CollectionReference users = FirebaseFirestore.instance.collection('Users');
   
+    users
+    .doc(name)
+    .set
+      ({
+        'name': name,
+        'id': id,
+        'email': email,
+        'whichRooms' : [],
+      });
+
   }
 
 
@@ -180,7 +188,6 @@ class _RegisterViewState extends State<RegisterView> {
                       )
                     ),
                   ),*/
-                  //useri backende kaydet,sonra emailini karşılaştırıp ordan işini bul.
                   const SizedBox(height: 10,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -207,9 +214,13 @@ class _RegisterViewState extends State<RegisterView> {
                                 );
 
                                 addUserDetails(
-                                  name,email,int.parse(id)
+                                  name,email,id,
                                 );
-                              }
+                                Navigator.of(context).push
+                                (MaterialPageRoute(builder: (BuildContext context){
+                                  return const ManagerView();
+                                }));
+                                            }
                           
                           on FirebaseAuthException catch(e){
                             log(e.code);

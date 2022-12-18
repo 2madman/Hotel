@@ -7,12 +7,11 @@ class Room{
   bool roomCleaned = false;
   bool initialCleaning = false;
   bool someoneCleaning = false;
+  bool someoneAlreadyCleaning = false;
   String uid;
   Room(this.roomNumber,this.floor,this.uid);
 
 }
-
-
 
 Room room1 = Room(101,1,"1");
 Room room2 = Room(102,1,"2");

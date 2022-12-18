@@ -1,7 +1,7 @@
-import 'package:first_app/widget/keeperappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
-import '../../widget/linked_check.dart';
+import '../../widget/housekeeper/keeperappbar.dart';
+import '../../widget/housekeeper/linked_check.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RoomsView extends StatefulWidget {
@@ -26,6 +26,7 @@ class _RoomsViewState extends State<RoomsView> {
           liste[i].roomCleaned = element.data()['roomCleaned'];
           liste[i].initialCleaning = element.data()['initialCleaning'];
           liste[i].someoneCleaning = element.data()['someoneCleaning'];
+          liste[i].someoneCleaning = element.data()['someoneAlreadyCleaning'];
         }
       }
     }));
@@ -44,7 +45,7 @@ class _RoomsViewState extends State<RoomsView> {
 
     return Expanded(
       child: ListView.builder(
-        itemCount: 10,
+        itemCount: liste.length,
         itemBuilder: (context,index){
           return LinkedLabelCheckbox(
             room: liste[index],

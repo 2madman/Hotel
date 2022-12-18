@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:first_app/Classes/housekeeper.dart';
 import 'package:first_app/Classes/rooms.dart';
+import 'package:first_app/main.dart';
 import 'package:first_app/widget/manager/room_register_check.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +16,43 @@ class RegisterRoomsView extends StatefulWidget {
 
 class _RegisterRoomsViewState extends State<RegisterRoomsView> {
   
+  Widget listViewBuilder(List liste){
+
+    return Expanded(
+      child: ListView.builder(
+        itemCount: notCleanedRooms.length % 2 == 0 ? notCleanedRooms.length ~/ 2 : notCleanedRooms.length ~/ 2 + 1,
+        itemBuilder: (_, index) {
+          return Row(
+            children: [
+                LinkedLabelCheckbox3(
+                  room: notCleanedRooms[index*2],
+                ),
+              if (index * 2 +1+ 1 <= notCleanedRooms.length)
+                LinkedLabelCheckbox3(
+                  room: notCleanedRooms[index*2+1],
+                ),
+            ],
+          );
+        },
+      ),
+    );
+
+  }
+
+  Future addUserDetails(HouseKeeper a) async{
+
+    await FirebaseFirestore.instance.collection('Users').add({
+      'whichRooms' : a.whichRooms,
+    });
+  
+  }
+
 
   @override
   Widget build(BuildContext context) {
     
+    CollectionReference users = FirebaseFirestore.instance.collection('Users');
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -26,65 +62,7 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
       body:  Column(
         children:[ 
           const SizedBox(height: 20,),
-          Row(
-            children : [
-              const SizedBox(height: 30,),
-              LinkedLabelCheckbox3(
-                room: room1,
-              ),
-              LinkedLabelCheckbox3(
-                room: room2,
-              ),
-            ],
-          ),
-          const SizedBox(height: 20,),
-          Row(
-            children : [
-              const SizedBox(height: 30,),
-              LinkedLabelCheckbox3(
-                room: room3,
-              ),
-              LinkedLabelCheckbox3(
-                room: room4,
-              ),
-            ],
-          ),
-          const SizedBox(height: 20,),
-          Row(
-            children : [
-              const SizedBox(height: 30,),
-              LinkedLabelCheckbox3(
-                room: room5,
-              ),
-              LinkedLabelCheckbox3(
-                room: room6,
-              ),
-            ],
-          ),
-          const SizedBox(height: 20,),
-          Row(
-            children : [
-              const SizedBox(height: 30,),
-              LinkedLabelCheckbox3(
-                room: room7,
-              ),
-              LinkedLabelCheckbox3(
-                room: room8,
-              ),
-            ],
-          ),
-          const SizedBox(height: 20,),
-          Row(
-            children : [
-              const SizedBox(height: 30,),
-              LinkedLabelCheckbox3(
-                room: room9,
-              ),
-              LinkedLabelCheckbox3(
-                room: room10,
-              ),
-            ],
-          ),
+          listViewBuilder(liste),
           Expanded(
             child: Align(
               alignment: FractionalOffset.bottomCenter,
@@ -108,3 +86,4 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
     );
   }
 }
+
