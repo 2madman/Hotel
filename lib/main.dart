@@ -17,6 +17,8 @@ int cleaned = 0;
 int notCleaned = 0;
 var allWorkersNames = [];
 var allWorkersIDs = [];
+var allWorkersEmails = [];
+var allWorkersJobs = [];
 var allWorkers = [];
 var notCleanedRooms = [];
 int sizeUsers = 0;
@@ -54,14 +56,17 @@ Future allWorker() async {
     sizeUsers = snapshot.docs.length;
     allWorkersNames.add(element.data()['name'].toString());
     allWorkersIDs.add(element.data()['id'].toString());
+    allWorkersEmails.add(element.data()['email'].toString());
+    allWorkersJobs.add(element.data()['job'].toString());
       
+
   }));
 }
 
 void createWorkers(){
 
   for(int i=0;i<sizeUsers;i++){
-    allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],"Housekeeper"));
+    allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],allWorkersJobs[i],allWorkersEmails[i]));
   }
 
 }
@@ -86,6 +91,7 @@ Future<void> addEvery() async {
       'id': allWorkers[i].id,
       'email': allWorkers[i].email,
       'whichRooms': allWorkers[i].whichRooms,
+      'job' : allWorkers[i].job,
     });
 
   }
@@ -101,12 +107,12 @@ void main () async{
   );
   
   name = nameApply();
+  await allWorker();
+  createWorkers();
   await addEvery();  
   addListe();
   getDocId();
   await refresh();
-  await allWorker();
-  createWorkers();
   notCleanedRoom();
   runApp(const MyApp());
 }
@@ -145,6 +151,22 @@ class FirstPage extends StatelessWidget {
             final user = FirebaseAuth.instance.currentUser;
             
             if(user != null){
+              for(int i=0;i<allWorkers.length;i++){
+
+                if(user.email.toString() == allWorkers[i].email){
+
+                  if(allWorkers[i].job == "Housekeeper"){
+                    return const HouseKeeperView();
+                  }
+                  /*else if(allWorkers[i].job == "Housemen"){
+                    return const HouseMenView();
+                  }
+                  else if(allWorkers[i].job == "Supervisor"){
+                    return const SupervisorView();
+                  }*/
+                }
+              }
+              
               return const  ManagerView();
             }
             else{

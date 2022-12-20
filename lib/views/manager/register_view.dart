@@ -22,9 +22,11 @@ class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _id;
 
   List<String> jobs =["Housekeeper","Housemen","Supervisor"];
+  String dropValue = "";
 
   @override
   void initState() {
+    dropValue = jobs[0];
     _email = TextEditingController();
     _password = TextEditingController();
     _name = TextEditingController();
@@ -41,7 +43,7 @@ class _RegisterViewState extends State<RegisterView> {
     super.dispose();
   }
   
-  Future addUserDetails(String name,String email,String id) async{
+  Future addUserDetails(String name,String email,String id,String job) async{
 
     CollectionReference users = FirebaseFirestore.instance.collection('Users');
   
@@ -52,6 +54,7 @@ class _RegisterViewState extends State<RegisterView> {
         'name': name,
         'id': id,
         'email': email,
+        'job' :job,
         'whichRooms' : [],
       });
 
@@ -60,9 +63,10 @@ class _RegisterViewState extends State<RegisterView> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey[300],
-      
       body:FutureBuilder(
         future: Firebase.initializeApp(
                   options: DefaultFirebaseOptions.currentPlatform,
@@ -170,7 +174,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     ),
                   ),
-                  /*const SizedBox(height: 5,),
+                  const SizedBox(height: 5,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
@@ -180,14 +184,25 @@ class _RegisterViewState extends State<RegisterView> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
-                        child: TextButton(
-                          child: const Text("Job"),
-                          onPressed: () {},
+                        padding: const EdgeInsets.only(right: 240.0),
+                        child: DropdownButton<String>(
+                          value: dropValue,
+                          elevation: 16,
+                          onChanged: (String? value) {
+                            setState(() {
+                              dropValue = value!;
+                            });
+                          },
+                          items: jobs.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
                         ),
-                      )
+                      ),
                     ),
-                  ),*/
+                  ),
                   const SizedBox(height: 10,),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -214,7 +229,7 @@ class _RegisterViewState extends State<RegisterView> {
                                 );
 
                                 addUserDetails(
-                                  name,email,id,
+                                  name,email,id,dropValue
                                 );
                                 Navigator.of(context).push
                                 (MaterialPageRoute(builder: (BuildContext context){
@@ -238,16 +253,6 @@ class _RegisterViewState extends State<RegisterView> {
                       )
                     )
                   ),
-                /*TextButton(
-                onPressed: () {
-                  Navigator.of(context).push
-                  (MaterialPageRoute(builder: (BuildContext context){
-                    return const LoginView();
-                  }));
-                },
-                  child: const Text(
-                      'Already registered'),
-                  )*/
                 ],
               ); 
 
@@ -257,7 +262,7 @@ class _RegisterViewState extends State<RegisterView> {
                 title: const Text("Loading.."),
               ),
               backgroundColor: Colors.grey[300],
-            );   
+            );
           }
           
         },

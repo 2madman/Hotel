@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:first_app/main.dart';
 import 'package:first_app/views/manager/manager_rooms_view.dart';
 import 'package:first_app/views/manager/manager_view.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,9 @@ String? nameApply(){
 
   final user = FirebaseAuth.instance.currentUser;  
   try{
-  for(int i=0;i<emailStore.length;i++){
-    if(user!.email.toString() == emailStore[i]){
-      name = nameStore[i].toString();
+  for(int i=0;i<allWorkers.length;i++){
+    if(user!.email.toString() == allWorkers[i].email){
+      name = allWorkers[i].name;
       return name;
     }
   }

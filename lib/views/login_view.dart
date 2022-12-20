@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
+import '../main.dart';
 import 'housekeeper/housekeeper_view.dart';
 import 'manager/manager_view.dart';
 
@@ -115,14 +116,28 @@ class _LoginViewState extends State<LoginView> {
                           final email = _email.text;
                           final password = _password.text;  
                           try{
-                              final userCredential = await FirebaseAuth.instance
+                              await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
                                   email: email,
                                   password: password,);
-                              Navigator.of(context).push
-                              (MaterialPageRoute(builder: (BuildContext context){
-                                return const ManagerView();
-                              }));
+                              final user = FirebaseAuth.instance.currentUser;
+
+                              for(int i=0;i<allWorkers.length;i++){
+                                if(user?.email.toString() == allWorkers[i].email){
+                                  if(allWorkers[i].job == "Housekeeper"){
+                                    Navigator.of(context).push
+                                    (MaterialPageRoute(builder: (BuildContext context){
+                                      return const HouseKeeperView();
+                                    }));
+                                  }
+                                  /*else if(allWorkers[i].job == "Housemen"){
+                                    return const HouseMenView();
+                                  }
+                                  else if(allWorkers[i].job == "Supervisor"){
+                                    return const SupervisorView();
+                                  }*/
+                                }
+                              }
                           }
                           on FirebaseAuthException catch(e){
                             if(e.code == "user-not-found"){

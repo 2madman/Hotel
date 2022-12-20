@@ -17,6 +17,7 @@ Future addUserDetails(HouseKeeper a) async{
 Future <dynamic> UserPopOut(BuildContext context)
 {
   CollectionReference Users = FirebaseFirestore.instance.collection('Users');
+  CollectionReference Rooms = FirebaseFirestore.instance.collection('Rooms');
 
   return showDialog(
     context: context,
@@ -59,6 +60,13 @@ Future <dynamic> UserPopOut(BuildContext context)
                             int a=0;
                             for(int i=0;i<liste.length;i++){
                               if(liste[i].someoneAlreadyCleaning == false && liste[i].someoneCleaning == true){
+                                Rooms
+                                .doc(liste[i].uid)
+                                .update
+                                  ({
+                                    'someoneAlreadyCleaning': true,
+                                  });
+                                
                                 for(int j=0;j<allWorkers.length;j++){
                                   if(allWorkers[j].cleaningRooms == true){                                    
                                     a=j;
