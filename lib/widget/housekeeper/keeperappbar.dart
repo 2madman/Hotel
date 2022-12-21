@@ -1,3 +1,4 @@
+import 'package:first_app/main.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,11 +7,23 @@ import '../manager/managerappbar.dart';
 
 String name="";
 
+void nameApply(){
+
+  final user = FirebaseAuth.instance.currentUser;
+  for(int i=0;i<allWorkers.length;i++){
+
+    if(user?.email.toString() == allWorkers[i].email.toString()){
+      name = allWorkers[i].name;
+    }
+  }
+
+}
+
 class HouseAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    nameApply();
     return Drawer(
       child: Material(
         color: const Color.fromARGB(255, 122, 83, 238),

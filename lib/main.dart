@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/Classes/housekeeper.dart';
 import 'package:first_app/views/housekeeper/housekeeper_view.dart';
+import 'package:first_app/views/housekeeper/rooms_view.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:first_app/views/manager/manager_view.dart';
 import 'package:first_app/views/manager/register_view.dart';
@@ -81,24 +82,6 @@ void notCleanedRoom(){
 
 }
 
-Future<void> addEvery() async {
-  
-
-  for(int i=0;i<allWorkers.length;i++){
-
-    await FirebaseFirestore.instance.collection('Users').add({
-      'name': allWorkers[i].name,
-      'id': allWorkers[i].id,
-      'email': allWorkers[i].email,
-      'whichRooms': allWorkers[i].whichRooms,
-      'job' : allWorkers[i].job,
-    });
-
-  }
-
-}
-
-
 void main () async{
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -106,14 +89,13 @@ void main () async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   
-  name = nameApply();
+  
   await allWorker();
-  createWorkers();
-  await addEvery();  
+  createWorkers(); 
   addListe();
-  getDocId();
   await refresh();
   notCleanedRoom();
+  await whichRooms();
   runApp(const MyApp());
 }
 

@@ -18,23 +18,6 @@ class ManagerView extends StatefulWidget {
 
 class _ManagerViewState extends State<ManagerView> {
 
-  Future getDocId() async {
-  int flag = 0;
-  await FirebaseFirestore.instance.collection('Users').get().then(
-    (snapshot) => snapshot.docs.forEach((element) {
-
-      for(int i=0;i<nameStore.length;i++){
-        if(element.data()['name'].toString() == nameStore[i]){
-          flag = 1;
-        }
-      }
-      if(flag != 1){
-        nameStore.add(element.data()['name'].toString());  
-        emailStore.add(element.data()['email'].toString()); 
-      }
-    }));
-  }
-
   List <String> docIDs = [];
 
   Future refresh() async {
@@ -60,7 +43,6 @@ class _ManagerViewState extends State<ManagerView> {
     
     addListe();
     refresh();
-    getDocId();
     return const ManagerRoomsView();
     
   }

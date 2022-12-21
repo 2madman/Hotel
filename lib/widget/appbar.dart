@@ -9,42 +9,11 @@ import '../views/manager/register_rooms.dart';
 List <String> docIDs = [];
 String name="";
 
-Future getDocId() async {
-
-  await FirebaseFirestore.instance.collection('Users').get().then(
-  (snapshot) => snapshot.docs.forEach((element) {
-    docIDs.add(element.data()['email']);  
-    docIDs.add(element.data()['name']);
-      
-  }));
-
-}
-
-String nameApply(){
-  getDocId();
-  final user = FirebaseAuth.instance.currentUser;
-
-  try{
-    for(int i=0;i<docIDs.length;i++){
-      if(user!.email.toString() == docIDs[i]){
-        name = docIDs[i+1].toString();
-        return docIDs[i+1].toString();
-      }
-    }
-  }catch(e){
-    log(e.toString());
-    
-  }
-  return "null";
-}
-
-
 class NavigationDrawerWidget extends StatelessWidget {
 
 
   @override
   Widget build(BuildContext context) {
-    nameApply();
     return Drawer(
       child: Material(
         color: const Color.fromARGB(255, 122, 83, 238),

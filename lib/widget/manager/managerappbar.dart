@@ -10,28 +10,23 @@ import '../appbar.dart';
 
 String ?name="";
 
-String? nameApply(){
+void nameApply(){
 
-  final user = FirebaseAuth.instance.currentUser;  
-  try{
+  final user = FirebaseAuth.instance.currentUser;
   for(int i=0;i<allWorkers.length;i++){
-    if(user!.email.toString() == allWorkers[i].email){
+
+    if(user?.email.toString() == allWorkers[i].email.toString()){
       name = allWorkers[i].name;
-      return name;
     }
   }
-  }catch(e){
-    log(e.toString());
-  }
-  return null;
-}
 
+}
 
 class ManagerAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    name = nameApply();
+    nameApply();
     return Drawer(
       child: Material(
         color: const Color.fromARGB(255, 122, 83, 238),
@@ -39,7 +34,7 @@ class ManagerAppBar extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 30),
             Text(
-              "       $name",
+              "       $name - Manager",
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold, 
