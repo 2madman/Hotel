@@ -1,9 +1,7 @@
 import 'package:first_app/main.dart';
-import 'package:first_app/views/manager/manager_rooms_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../views/manager/register_rooms.dart';
-import '../../views/manager/register_view.dart';
+import '../../views/supervisor/supervisor_view.dart';
 import '../appbar.dart';
 
 String ?name="";
@@ -20,7 +18,7 @@ void nameApply(){
 
 }
 
-class ManagerAppBar extends StatelessWidget {
+class HousemenAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,7 @@ class ManagerAppBar extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 30),
             Text(
-              "       $name - Manager",
+              "       $name",
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold, 
@@ -56,27 +54,7 @@ class ManagerAppBar extends StatelessWidget {
               onClicked: (){
                  Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
-                  return const ManagerRoomsView();
-                }));
-              },
-            ),
-            buildMenuItem(
-              text: "Register Rooms", 
-              icon: Icons.assignment_ind_rounded,
-              onClicked: (){
-                 Navigator.of(context).push
-                  (MaterialPageRoute(builder: (BuildContext context){
-                  return const RegisterRoomsView();
-                }));
-              },
-            ),
-            buildMenuItem(
-              text: "Register New Employee", 
-              icon: Icons.add_circle,
-              onClicked: (){
-                 Navigator.of(context).push
-                  (MaterialPageRoute(builder: (BuildContext context){
-                  return const RegisterView();
+                  return const SupervisorView();
                 }));
               },
             ),
@@ -88,7 +66,7 @@ class ManagerAppBar extends StatelessWidget {
               text: "Log Out", 
               icon: Icons.logout,
               onClicked: (){
-                 showAlertDialog(context);
+                showAlertDialog(context);
               },
             ),
           ],

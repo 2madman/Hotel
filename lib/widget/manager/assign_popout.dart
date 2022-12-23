@@ -3,7 +3,6 @@ import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
 import '../../Classes/housekeeper.dart';
 import '../../Classes/rooms.dart';
-import '../../views/manager/manager_view.dart';
 import '../housekeeper/linked_check2.dart';
 
 Future addUserDetails(HouseKeeper a) async{

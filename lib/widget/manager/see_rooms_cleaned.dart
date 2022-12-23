@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../Classes/rooms.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Checkboxxx extends StatefulWidget {
   const Checkboxxx({

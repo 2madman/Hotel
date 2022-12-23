@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/Classes/housekeeper.dart';
 import 'package:first_app/views/housekeeper/housekeeper_view.dart';
 import 'package:first_app/views/housekeeper/rooms_view.dart';
+import 'package:first_app/views/housemen/housemen_view.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:first_app/views/manager/manager_view.dart';
 import 'package:first_app/views/manager/register_view.dart';
@@ -13,7 +14,6 @@ import 'package:first_app/widget/appbar.dart';
 import 'package:first_app/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'Classes/rooms.dart';
-import 'Classes/worker.dart';
 
 int cleaned = 0;
 int notCleaned = 0;
@@ -42,7 +42,8 @@ Future refresh() async {
         liste[i].someoneCleaning = element.data()['someoneCleaning'];
         liste[i].someoneAlreadyCleaning = element.data()['someoneAlreadyCleaning'];
         liste[i].roomFine = element.data()['roomFine'];
-        
+        liste[i].roomNeeds = element.data()['roomNeeds'].toString();
+
         if(liste[i].roomCleaned == true && liste.length != cleaned+notCleaned){  cleaned++; }
         else if(liste.length != cleaned+notCleaned) { notCleaned++; }
       }
@@ -142,9 +143,9 @@ class FirstPage extends StatelessWidget {
                   if(allWorkers[i].job == "Housekeeper"){
                     return const HouseKeeperView();
                   }
-                  /*else if(allWorkers[i].job == "Housemen"){
-                    return const HouseMenView();
-                  }*/
+                  else if(allWorkers[i].job == "Housemen"){
+                    return const HousemenView();
+                  }
                   else if(allWorkers[i].job == "Supervisor"){
                     return const SupervisorView();
                   }

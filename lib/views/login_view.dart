@@ -1,12 +1,10 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
 import '../main.dart';
 import 'housekeeper/housekeeper_view.dart';
-import 'manager/manager_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);

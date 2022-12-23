@@ -1,11 +1,6 @@
-import 'dart:developer';
 import 'package:first_app/main.dart';
-import 'package:first_app/views/manager/manager_rooms_view.dart';
-import 'package:first_app/views/manager/manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../views/manager/register_rooms.dart';
-import '../../views/manager/register_view.dart';
 import '../../views/supervisor/supervisor_view.dart';
 import '../appbar.dart';
 
