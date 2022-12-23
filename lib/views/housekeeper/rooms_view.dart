@@ -26,11 +26,13 @@ Future whichRooms() async{
 
 void addRooms(){
 
-  for(int i=0;i<liste.length;i++){
-    for(int j=0;j<userRoomsNums.length;j++){
-      if(liste[i].roomNumber == userRoomsNums[j]){
-        
-        userRooms.add(liste[i]);
+  if(userRoomsNums.length > userRooms.length )
+  {
+    for(int i=0;i<liste.length;i++){
+      for(int j=0;j<userRoomsNums.length;j++){
+        if(liste[i].roomNumber == userRoomsNums[j]){    
+          userRooms.add(liste[i]);
+        }
       }
     }
   }

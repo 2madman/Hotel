@@ -8,6 +8,7 @@ import 'package:first_app/views/housekeeper/rooms_view.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:first_app/views/manager/manager_view.dart';
 import 'package:first_app/views/manager/register_view.dart';
+import 'package:first_app/views/supervisor/supervisor_view.dart';
 import 'package:first_app/widget/appbar.dart';
 import 'package:first_app/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ Future refresh() async {
         liste[i].initialCleaning = element.data()['initialCleaning'];
         liste[i].someoneCleaning = element.data()['someoneCleaning'];
         liste[i].someoneAlreadyCleaning = element.data()['someoneAlreadyCleaning'];
+        liste[i].roomFine = element.data()['roomFine'];
         
         if(liste[i].roomCleaned == true && liste.length != cleaned+notCleaned){  cleaned++; }
         else if(liste.length != cleaned+notCleaned) { notCleaned++; }
@@ -142,10 +144,10 @@ class FirstPage extends StatelessWidget {
                   }
                   /*else if(allWorkers[i].job == "Housemen"){
                     return const HouseMenView();
-                  }
+                  }*/
                   else if(allWorkers[i].job == "Supervisor"){
                     return const SupervisorView();
-                  }*/
+                  }
                 }
               }
               

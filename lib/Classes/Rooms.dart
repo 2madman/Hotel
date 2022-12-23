@@ -8,6 +8,8 @@ class Room{
   bool initialCleaning = false;
   bool someoneCleaning = false;
   bool someoneAlreadyCleaning = false;
+  bool roomFine = false;
+  String roomNeeds = "";
   String uid;
   Room(this.roomNumber,this.floor,this.uid);
 

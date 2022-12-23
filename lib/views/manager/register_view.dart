@@ -22,7 +22,7 @@ class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _id;
 
   List<String> jobs =["Housekeeper","Housemen","Supervisor"];
-  String dropValue = "";
+  String dropValue = "Job";
 
   @override
   void initState() {
