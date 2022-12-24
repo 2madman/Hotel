@@ -20,6 +20,17 @@ class LinkedLabelCheckbox3 extends StatefulWidget {
   State<LinkedLabelCheckbox3> createState() => _LinkedLabelCheckbox3State();
 }
 
+bool checkHousemen(Room room){
+
+  if(room.initialCleaning == true || room.roomNeeds != ""){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+bool check = false;
 class _LinkedLabelCheckbox3State extends State<LinkedLabelCheckbox3> {
   
   @override
@@ -33,31 +44,21 @@ class _LinkedLabelCheckbox3State extends State<LinkedLabelCheckbox3> {
               PopOut(context,widget.room);
             },
             child: Text(
-            "Room ${widget.room.roomNumber}",
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 21,
-              color: Colors.blueAccent
+              "Room ${widget.room.roomNumber}",
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 21,
+                color: Colors.blueAccent
+              ),
             ),
           ),
-        ),
           Checkboxx(widget.room),
         ],
       ),
     );
   }
 
-  bool checkHousemen(Room room){
-
-    if(room.initialCleaning == true || room.roomNeeds != ""){
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-  bool check = false;
+  
   
   Widget Checkboxx(Room room ){
 

@@ -25,6 +25,9 @@ var allWorkers = [];
 var notCleanedRooms = [];
 int sizeUsers = 0;
 int sizeRooms = 0;
+var userRooms = [];
+var userRoomsNums = [];
+var houseWorkers = [];
 
 Future refresh() async {
 
@@ -62,8 +65,6 @@ Future allWorker() async {
     allWorkersIDs.add(element.data()['id'].toString());
     allWorkersEmails.add(element.data()['email'].toString());
     allWorkersJobs.add(element.data()['job'].toString());
-      
-
   }));
 }
 
@@ -72,7 +73,12 @@ void createWorkers(){
   for(int i=0;i<sizeUsers;i++){
     allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],allWorkersJobs[i],allWorkersEmails[i]));
   }
-
+  for(int i=0;i<sizeUsers;i++){
+    if(allWorkers[i].job =="Housekeeper" || allWorkers[i].job =="Housemen")
+    {
+      houseWorkers.add(allWorkers);
+    }
+  }
 }
 
 void notCleanedRoom(){
@@ -85,6 +91,33 @@ void notCleanedRoom(){
 
 }
 
+Future whichRooms() async{
+    
+    final user = FirebaseAuth.instance.currentUser;
+
+    await FirebaseFirestore.instance.collection('Users').get().then(
+    (snapshot) => snapshot.docs.forEach((element) {
+      
+      if(user?.email.toString() ==  (element.data()['email'].toString())){
+        userRoomsNums = (element.data()['whichRooms']);
+        log(userRoomsNums.toString());
+      }
+    }));
+  }
+
+  void addRooms(){
+
+    if(userRoomsNums.length > userRooms.length )
+    {
+      for(int i=0;i<liste.length;i++){
+        for(int j=0;j<userRoomsNums.length;j++){
+          if(liste[i].roomNumber == userRoomsNums[j]){    
+            userRooms.add(liste[i]);
+          }
+        }
+      }
+    }
+  }
 void main () async{
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -92,13 +125,23 @@ void main () async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   
-  
   await allWorker();
   createWorkers(); 
   addListe();
   await refresh();
   notCleanedRoom();
   await whichRooms();
+  final user = FirebaseAuth.instance.currentUser;
+  if(user != null){
+    for(int i=0;i<allWorkers.length;i++){
+      if(user.email.toString() == allWorkers[i].email){
+        if(allWorkers[i].job == "Housekeeper" ||allWorkers[i].job == "Housemen"){
+          await whichRooms();
+          addRooms();
+        }
+      }
+    }
+  }
   runApp(const MyApp());
 }
 

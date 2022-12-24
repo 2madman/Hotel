@@ -36,15 +36,15 @@ Future <dynamic> UserPopOut(BuildContext context)
                         height: 350,
                         width: 250,
                         child: ListView.builder(
-                            itemCount: allWorkers.length,
+                            itemCount: houseWorkers.length,
                             itemBuilder: (_, index) {
                               return LinkedLabelCheckbox2(
-                                label: allWorkers[index].name,
+                                label: houseWorkers[index].name,
                                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                value: allWorkers[index].cleaningRooms,
+                                value: houseWorkers[index].cleaningRooms,
                                 onChanged: (bool? newValue) {
                                   setState(() {
-                                    allWorkers[index].cleaningRooms = !allWorkers[index].cleaningRooms; 
+                                    houseWorkers[index].cleaningRooms = !houseWorkers[index].cleaningRooms; 
                                   }); 
                                 },
                               );
@@ -66,19 +66,19 @@ Future <dynamic> UserPopOut(BuildContext context)
                                     'someoneAlreadyCleaning': true,
                                   });
                                 
-                                for(int j=0;j<allWorkers.length;j++){
-                                  if(allWorkers[j].cleaningRooms == true){                                    
+                                for(int j=0;j<houseWorkers.length;j++){
+                                  if(houseWorkers[j].cleaningRooms == true){                                    
                                     a=j;
-                                    allWorkers[j].whichRooms.add(liste[i].roomNumber);                                 
+                                    houseWorkers[j].whichRooms.add(liste[i].roomNumber);                                 
                                   }
                                 }
                               }
                             }
                             Users
-                              .doc(allWorkers[a].name)
+                              .doc(houseWorkers[a].name)
                               .update
                                 ({
-                                  'whichRooms':allWorkers[a].whichRooms,
+                                  'whichRooms':houseWorkers[a].whichRooms,
                                 });
                             
                             

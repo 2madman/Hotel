@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../../Classes/rooms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,21 +29,20 @@ Future <void> PopOut(BuildContext context,Room room )
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
+                      if(room.initialCleaning == true)
                       LinkedLabelCheckbox2(
-                        label: "Initial cleaning is done.",
+                        label: "Need initial cleaning.",
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         value: room.initialCleaning,
                         onChanged: (bool newValue) {
                           setState(() {
-                            if(room.initialCleaning == true){
-                              room.initialCleaning = newValue;
-                              rooms
-                              .doc(room.uid)
-                              .update
-                                ({
-                                  'initialCleaning': room.initialCleaning,
-                                });
-                            }
+                            room.initialCleaning = newValue;
+                            rooms
+                            .doc(room.uid)
+                            .update
+                              ({
+                                'initialCleaning': room.initialCleaning,
+                              });
                           });
                         },
                       ),
@@ -53,15 +54,13 @@ Future <void> PopOut(BuildContext context,Room room )
                         value: false,
                         onChanged: (bool newValue) {
                           setState(() {
-                            if(room.initialCleaning == true){
-                              room.roomNeeds = "";
-                              rooms
-                              .doc(room.uid)
-                              .update
-                                ({
-                                  'roomNeeds': "",
-                                });
-                            }
+                            room.roomNeeds = "";
+                            rooms
+                            .doc(room.uid)
+                            .update
+                              ({
+                                'roomNeeds': "",
+                              });                            
                           });
                         },
                       ),

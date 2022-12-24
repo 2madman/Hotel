@@ -1,9 +1,13 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../main.dart';
 import '../../widget/housemen/men_appbar.dart';
 import '../../widget/housemen/checkbox.dart';
+
 
 
 class HousemenView extends StatefulWidget {
@@ -14,6 +18,7 @@ class HousemenView extends StatefulWidget {
 }
 
 class _HousemenViewState extends State<HousemenView> {
+
   Future refresh() async {
 
     await FirebaseFirestore.instance.collection('Rooms').get().then(
@@ -51,9 +56,9 @@ class _HousemenViewState extends State<HousemenView> {
                 room: liste[index*2],
               ),
               if (index * 2 +1+ 1 <= liste.length)
-                LinkedLabelCheckbox3(
-                  room: liste[index*2+1],
-                ),
+              LinkedLabelCheckbox3(
+                room: liste[index*2+1],
+              ),
             ],
           );
         },
@@ -80,7 +85,6 @@ class _HousemenViewState extends State<HousemenView> {
     cleaned = cleanedRoomNumber(liste);
     notCleaned = liste.length - cleaned;
     CollectionReference rooms = FirebaseFirestore.instance.collection('Rooms');
-
     return Scaffold(      
       appBar: AppBar(
         title: const Text("Rooms"),
@@ -90,11 +94,9 @@ class _HousemenViewState extends State<HousemenView> {
       backgroundColor: Colors.grey[300],
       body: Column(
         children: [
-          const SizedBox(height: 30,),
-          listViewBuilder(liste),
+          listViewBuilder(userRooms),
         ],
       ),
-
     );
   }
 }

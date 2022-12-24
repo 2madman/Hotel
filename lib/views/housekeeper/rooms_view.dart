@@ -2,39 +2,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
+import '../../main.dart';
 import '../../widget/housekeeper/keeperappbar.dart';
 import '../../widget/housekeeper/linked_check.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-var userRooms = [];
-var userRoomsNums = [];
-
-Future whichRooms() async{
-    
-  final user = FirebaseAuth.instance.currentUser;
-
-  await FirebaseFirestore.instance.collection('Users').get().then(
-  (snapshot) => snapshot.docs.forEach((element) {
-    
-    if(user?.email.toString() ==  (element.data()['email'].toString())){
-      userRoomsNums = (element.data()['whichRooms']);
-    }
-  }));
-}
-
-void addRooms(){
-
-  if(userRoomsNums.length > userRooms.length )
-  {
-    for(int i=0;i<liste.length;i++){
-      for(int j=0;j<userRoomsNums.length;j++){
-        if(liste[i].roomNumber == userRoomsNums[j]){    
-          userRooms.add(liste[i]);
-        }
-      }
-    }
-  }
-}
 
 class RoomsView extends StatefulWidget {
   const RoomsView({Key? key}) : super(key: key);
@@ -93,7 +65,6 @@ class _RoomsViewState extends State<RoomsView> {
     
     addListe();
     refresh();
-    addRooms();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Rooms"),
