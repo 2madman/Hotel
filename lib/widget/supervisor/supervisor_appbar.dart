@@ -38,16 +38,6 @@ class SupervisorAppBar extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15,),
-            /*buildMenuItem(
-              text: "Home Page",
-              icon: Icons.home,
-              onClicked: (){
-                 Navigator.of(context).push
-                  (MaterialPageRoute(builder: (BuildContext context){
-                  return const ManagerView();
-                }));
-              },
-            ),*/
             buildMenuItem(
               text: "Rooms",
               icon: Icons.meeting_room,

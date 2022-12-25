@@ -184,7 +184,7 @@ class _RegisterViewState extends State<RegisterView> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 240.0),
+                        padding: const EdgeInsets.only(right: 120.0),
                         child: DropdownButton<String>(
                           value: dropValue,
                           elevation: 16,

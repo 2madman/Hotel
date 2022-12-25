@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +58,11 @@ Future <dynamic> UserPopOut(BuildContext context)
                         child: TextButton(
                           child: const Text("Assign"),
                           onPressed: () {
+                            for(int j=0;j<houseWorkers.length;j++){
+                                  if(houseWorkers[j].cleaningRooms == true){                                    
+                                    log(houseWorkers[j].name.toString());                                
+                                  }
+                                }
                             int a=0;
                             for(int i=0;i<liste.length;i++){
                               if(liste[i].someoneAlreadyCleaning == false && liste[i].someoneCleaning == true){

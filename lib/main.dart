@@ -76,7 +76,7 @@ void createWorkers(){
   for(int i=0;i<sizeUsers;i++){
     if(allWorkers[i].job =="Housekeeper" || allWorkers[i].job =="Housemen")
     {
-      houseWorkers.add(allWorkers);
+      houseWorkers.add(allWorkers[i]);
     }
   }
 }
@@ -98,7 +98,10 @@ Future whichRooms() async{
     await FirebaseFirestore.instance.collection('Users').get().then(
     (snapshot) => snapshot.docs.forEach((element) {
       
-      if(user?.email.toString() ==  (element.data()['email'].toString())){
+      if(user?.email.toString() ==  (element.data()['email'].toString()) && 
+        (element.data()['job'].toString()) != "Manager" && 
+        (element.data()['job'].toString() != "Supervisor")){
+
         userRoomsNums = (element.data()['whichRooms']);
         log(userRoomsNums.toString());
       }
@@ -184,7 +187,7 @@ class FirstPage extends StatelessWidget {
                 if(user.email.toString() == allWorkers[i].email){
 
                   if(allWorkers[i].job == "Housekeeper"){
-                    return const HouseKeeperView();
+                    return const ManagerView();
                   }
                   else if(allWorkers[i].job == "Housemen"){
                     return const HousemenView();
@@ -194,7 +197,6 @@ class FirstPage extends StatelessWidget {
                   }
                 }
               }
-              
               return const  ManagerView();
             }
             else{

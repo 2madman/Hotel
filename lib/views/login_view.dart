@@ -1,10 +1,13 @@
 import 'dart:developer';
+import 'package:first_app/views/supervisor/supervisor_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
 import '../main.dart';
 import 'housekeeper/housekeeper_view.dart';
+import 'housemen/housemen_view.dart';
+import 'manager/manager_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -119,23 +122,36 @@ class _LoginViewState extends State<LoginView> {
                                   email: email,
                                   password: password,);
                               final user = FirebaseAuth.instance.currentUser;
-
+                              int f1=0,f2=0,f3=0;
                               for(int i=0;i<allWorkers.length;i++){
                                 if(user?.email.toString() == allWorkers[i].email){
-                                  if(allWorkers[i].job == "Housekeeper"){
+                                  if(allWorkers[i].job.toString() == "Housekeeper"){
                                     Navigator.of(context).push
                                     (MaterialPageRoute(builder: (BuildContext context){
                                       return const HouseKeeperView();
                                     }));
                                   }
-                                  /*else if(allWorkers[i].job == "Housemen"){
-                                    return const HouseMenView();
+                                  else if(allWorkers[i].job.toString() == "Housemen"){
+                                    Navigator.of(context).push
+                                    (MaterialPageRoute(builder: (BuildContext context){
+                                      return const HousemenView();
+                                    }));
                                   }
-                                  else if(allWorkers[i].job == "Supervisor"){
-                                    return const SupervisorView();
-                                  }*/
+                                  else if(allWorkers[i].job.toString() == "Supervisor"){
+                                    Navigator.of(context).push
+                                    (MaterialPageRoute(builder: (BuildContext context){
+                                      return const SupervisorView();
+                                    }));
+                                  }                                  
+                                  else if(allWorkers[i].job.toString() == "Manager"){
+                                    Navigator.of(context).push
+                                    (MaterialPageRoute(builder: (BuildContext context){
+                                      return const ManagerView();
+                                    }));
+                                  }  
                                 }
                               }
+                              
                           }
                           on FirebaseAuthException catch(e){
                             if(e.code == "user-not-found"){
