@@ -1,10 +1,13 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
 
+import '../../Classes/housekeeper.dart';
+import 'manager_rooms_view.dart';
 import 'manager_view.dart';
 
 class RegisterView extends StatefulWidget {
@@ -231,11 +234,20 @@ class _RegisterViewState extends State<RegisterView> {
                                 addUserDetails(
                                   name,email,id,dropValue
                                 );
+
+                                if(dropValue == "Housekeeper" || dropValue == "Housemen"){
+                                  houseWorkers.add(HouseKeeper(name,id,dropValue,email));
+                                }
+                                else{
+                                  allWorkers.add(HouseKeeper(name,id,dropValue,email));
+                                  workersExManager.add(HouseKeeper(name,id,dropValue,email));
+                                }
+                                
                                 Navigator.of(context).push
-                                (MaterialPageRoute(builder: (BuildContext context){
-                                  return const ManagerView();
-                                }));
-                                            }
+                                  (MaterialPageRoute(builder: (BuildContext context){
+                                  return const ManagerRoomsView();
+                                }));                                                            
+                              }
                           
                           on FirebaseAuthException catch(e){
                             log(e.code);

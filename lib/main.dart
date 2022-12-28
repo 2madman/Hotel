@@ -28,6 +28,10 @@ int sizeRooms = 0;
 var userRooms = [];
 var userRoomsNums = [];
 var houseWorkers = [];
+var workersExManager = [];
+var housekeepers = [];
+var housemens = [];
+var supervisors = [];
 
 Future refresh() async {
 
@@ -81,6 +85,31 @@ void createWorkers(){
   }
 }
 
+void addWorkers(){
+
+  for(int i=0;i<sizeUsers;i++){
+    allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],allWorkersJobs[i],allWorkersEmails[i]));
+  }
+  for(int i=0;i<sizeUsers;i++){
+    if(allWorkers[i].job =="Housekeeper"){
+      housekeepers.add(allWorkers[i]);
+      log("housekeeper");
+    }
+    if(allWorkers[i].job =="Housemen"){
+      housemens.add(allWorkers[i]);
+      log("housemen");
+    }
+    if(allWorkers[i].job =="Supervisor"){
+      supervisors.add(allWorkers[i]);
+      log("supervisor");
+    }
+    if(allWorkers[i].job =="Housekeeper" || allWorkers[i].job =="Housemen" || allWorkers[i].job =="Supervisor")
+    {
+      workersExManager.add(allWorkers[i]);
+    }
+  }
+}
+
 void notCleanedRoom(){
 
   for(int i=0;i<liste.length;i++){
@@ -130,6 +159,7 @@ void main () async{
   
   await allWorker();
   createWorkers(); 
+  addWorkers();
   addListe();
   await refresh();
   notCleanedRoom();
@@ -187,7 +217,7 @@ class FirstPage extends StatelessWidget {
                 if(user.email.toString() == allWorkers[i].email){
 
                   if(allWorkers[i].job == "Housekeeper"){
-                    return const ManagerView();
+                    return const HouseKeeperView();
                   }
                   else if(allWorkers[i].job == "Housemen"){
                     return const HousemenView();

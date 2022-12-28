@@ -79,6 +79,7 @@ Future <dynamic> UserPopOut(BuildContext context)
                                     houseWorkers[j].whichRooms.add(liste[i].roomNumber);                                 
                                   }
                                 }
+                                houseWorkers[a].cleaningRooms = false;
                               }
                             }
                             Users

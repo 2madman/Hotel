@@ -2,6 +2,7 @@ import 'package:first_app/main.dart';
 import 'package:first_app/views/manager/manager_rooms_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../views/manager/delete_users.dart';
 import '../../views/manager/register_rooms.dart';
 import '../../views/manager/register_view.dart';
 import '../appbar.dart';
@@ -40,21 +41,11 @@ class ManagerAppBar extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15,),
-            /*buildMenuItem(
-              text: "Home Page",
-              icon: Icons.home,
-              onClicked: (){
-                 Navigator.of(context).push
-                  (MaterialPageRoute(builder: (BuildContext context){
-                  return const ManagerView();
-                }));
-              },
-            ),*/
             buildMenuItem(
               text: "Rooms",
               icon: Icons.meeting_room,
               onClicked: (){
-                 Navigator.of(context).push
+                Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
                   return const ManagerRoomsView();
                 }));
@@ -77,6 +68,16 @@ class ManagerAppBar extends StatelessWidget {
                  Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
                   return const RegisterView();
+                }));
+              },
+            ),
+            buildMenuItem(
+              text: "Delete Employee", 
+              icon: Icons.line_weight,
+              onClicked: (){
+                 Navigator.of(context).push
+                  (MaterialPageRoute(builder: (BuildContext context){
+                  return const DeleteUser();
                 }));
               },
             ),
