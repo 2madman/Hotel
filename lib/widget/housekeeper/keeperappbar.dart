@@ -43,7 +43,7 @@ class HouseAppBar extends StatelessWidget {
               text: "Rooms",
               icon: Icons.meeting_room,
               onClicked: (){
-                 Navigator.of(context).push
+                Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
                   return const RoomsView();
                 }));
@@ -80,10 +80,11 @@ showAlertDialog(BuildContext context) {
     child: const Text("Log Out"),
     onPressed: () async {
       await FirebaseAuth.instance.signOut();
-      Navigator.of(context).push
-      (MaterialPageRoute(builder: (BuildContext context){
-        return const LoginView();
-      }));
+      Navigator.of(context).pushAndRemoveUntil
+        (MaterialPageRoute(
+          builder: (context)=> const LoginView()
+        ),(route)=>false
+      );
     },
   );
 

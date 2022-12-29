@@ -28,7 +28,7 @@ class _ManagerRoomsViewState extends State<ManagerRoomsView> {
           liste[i].roomCleaned = element.data()['roomCleaned'];
           liste[i].initialCleaning = element.data()['initialCleaning'];
           liste[i].someoneCleaning = element.data()['someoneCleaning'];
-          
+          liste[i].someoneAlreadyCleaning = element.data()['someoneAlreadyCleaning'];
         }
       }
     }));

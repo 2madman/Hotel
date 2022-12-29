@@ -243,10 +243,11 @@ class _RegisterViewState extends State<RegisterView> {
                                   workersExManager.add(HouseKeeper(name,id,dropValue,email));
                                 }
                                 
-                                Navigator.of(context).push
-                                  (MaterialPageRoute(builder: (BuildContext context){
-                                  return const ManagerRoomsView();
-                                }));                                                            
+                                Navigator.of(context).pushAndRemoveUntil
+                                  (MaterialPageRoute(
+                                    builder: (context)=> const ManagerView()
+                                  ),(route)=>false
+                                );                                                            
                               }
                           
                           on FirebaseAuthException catch(e){

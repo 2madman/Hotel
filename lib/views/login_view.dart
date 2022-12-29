@@ -126,28 +126,32 @@ class _LoginViewState extends State<LoginView> {
                               for(int i=0;i<allWorkers.length;i++){
                                 if(user?.email.toString() == allWorkers[i].email){
                                   if(allWorkers[i].job.toString() == "Housekeeper"){
-                                    Navigator.of(context).push
-                                    (MaterialPageRoute(builder: (BuildContext context){
-                                      return const HouseKeeperView();
-                                    }));
+                                    Navigator.of(context).pushAndRemoveUntil
+                                      (MaterialPageRoute(
+                                        builder: (context)=> const HouseKeeperView()
+                                      ),(route)=>false
+                                    );
                                   }
                                   else if(allWorkers[i].job.toString() == "Housemen"){
-                                    Navigator.of(context).push
-                                    (MaterialPageRoute(builder: (BuildContext context){
-                                      return const HousemenView();
-                                    }));
+                                    Navigator.of(context).pushAndRemoveUntil
+                                      (MaterialPageRoute(
+                                        builder: (context)=> const HousemenView()
+                                      ),(route)=>false
+                                    );
                                   }
                                   else if(allWorkers[i].job.toString() == "Supervisor"){
-                                    Navigator.of(context).push
-                                    (MaterialPageRoute(builder: (BuildContext context){
-                                      return const SupervisorView();
-                                    }));
+                                    Navigator.of(context).pushAndRemoveUntil
+                                      (MaterialPageRoute(
+                                        builder: (context)=> const SupervisorView()
+                                      ),(route)=>false
+                                    );
                                   }                                  
                                   else if(allWorkers[i].job.toString() == "Manager"){
-                                    Navigator.of(context).push
-                                    (MaterialPageRoute(builder: (BuildContext context){
-                                      return const ManagerView();
-                                    }));
+                                    Navigator.of(context).pushAndRemoveUntil
+                                      (MaterialPageRoute(
+                                        builder: (context)=> const ManagerView()
+                                      ),(route)=>false
+                                    );
                                   }  
                                 }
                               }
@@ -181,16 +185,6 @@ class _LoginViewState extends State<LoginView> {
                 child: const Text(
                   'Forgot your password'),
               ),
-              /*TextButton(
-                onPressed: () {
-                  Navigator.of(context).push
-                  (MaterialPageRoute(builder: (BuildContext context){
-                    return const RegisterView();
-                  }));
-                },
-                child: const Text(
-                  'Go to register page.'),
-              )*/
             ],
       ); 
 

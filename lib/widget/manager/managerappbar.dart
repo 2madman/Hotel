@@ -89,7 +89,7 @@ class ManagerAppBar extends StatelessWidget {
               text: "Log Out", 
               icon: Icons.logout,
               onClicked: (){
-                 showAlertDialog(context);
+                showAlertDialog(context);
               },
             ),
           ],

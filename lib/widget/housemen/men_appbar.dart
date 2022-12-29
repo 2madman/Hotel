@@ -1,6 +1,7 @@
 import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../views/housemen/housemen_view.dart';
 import '../../views/supervisor/supervisor_view.dart';
 import '../appbar.dart';
 
@@ -54,7 +55,7 @@ class HousemenAppBar extends StatelessWidget {
               onClicked: (){
                  Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
-                  return const SupervisorView();
+                  return const HousemenView();
                 }));
               },
             ),

@@ -80,10 +80,11 @@ showAlertDialog(BuildContext context) {
     child: const Text("Log Out"),
     onPressed: () async {
       await FirebaseAuth.instance.signOut();
-      Navigator.of(context).push
-      (MaterialPageRoute(builder: (BuildContext context){
-        return const LoginView();
-      }));
+      Navigator.of(context).pushAndRemoveUntil
+        (MaterialPageRoute(
+          builder: (context)=> const LoginView()
+        ),(route)=>false
+      );
     },
   );
 
