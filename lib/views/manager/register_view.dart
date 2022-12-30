@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:first_app/firebase_options.dart';
-
 import '../../Classes/housekeeper.dart';
-import 'manager_rooms_view.dart';
 import 'manager_view.dart';
 
 class RegisterView extends StatefulWidget {
@@ -230,24 +228,40 @@ class _RegisterViewState extends State<RegisterView> {
                                     email: email, 
                                     password: password
                                 );
-
+                                                                
                                 addUserDetails(
                                   name,email,id,dropValue
                                 );
 
                                 if(dropValue == "Housekeeper" || dropValue == "Housemen"){
                                   houseWorkers.add(HouseKeeper(name,id,dropValue,email));
+                                  workersExManager.add(HouseKeeper(name,id,dropValue,email));
+                                  allWorkers.add(HouseKeeper(name,id,dropValue,email));
                                 }
                                 else{
                                   allWorkers.add(HouseKeeper(name,id,dropValue,email));
                                   workersExManager.add(HouseKeeper(name,id,dropValue,email));
                                 }
                                 
+                                
+
                                 Navigator.of(context).pushAndRemoveUntil
                                   (MaterialPageRoute(
                                     builder: (context)=> const ManagerView()
                                   ),(route)=>false
                                 );                                                            
+
+                                showDialog
+                                ( context: context,
+                                  builder:(context) =>AlertDialog(
+                                  title: const Text("Operation is succesfull"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],                                      
+                                ));
                               }
                           
                           on FirebaseAuthException catch(e){

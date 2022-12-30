@@ -41,6 +41,19 @@ Future <void> DeletePopOut(BuildContext context,HouseKeeper employee)
                               .doc(employee.name)
                               .delete();
                             Navigator.of(context, rootNavigator: true).pop('dialog');  
+
+                            showDialog
+                            ( context: context,
+                              builder:(context) =>AlertDialog(
+                              title: const Text("User has been deleted"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () { Navigator.pop(context, 'OK'); Navigator.of(context, rootNavigator: true).pop('dialog');  },
+                                  child: const Text('OK'),
+                                ),
+                              ],                                      
+                            ));
+                            
                           },
                         ),
                       )

@@ -178,13 +178,12 @@ class _LoginViewState extends State<LoginView> {
                       )
                     )
                   ),
-              
-              TextButton(
+              /*TextButton(
                 onPressed: () {
                 },
                 child: const Text(
                   'Forgot your password'),
-              ),
+              ),*/
             ],
       ); 
 

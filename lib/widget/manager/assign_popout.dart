@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +90,17 @@ Future <dynamic> UserPopOut(BuildContext context)
                             
                             
                             Navigator.of(context, rootNavigator: true).pop('dialog');
+                            showDialog
+                            ( context: context,
+                              builder:(context) =>AlertDialog(
+                              title: const Text("Operation is succesfull"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],                                      
+                            ));
                           },
                         ),
                       )
