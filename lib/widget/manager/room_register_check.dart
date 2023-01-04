@@ -48,12 +48,7 @@ class _LinkedLabelCheckbox3State extends State<LinkedLabelCheckbox3> {
       onChanged: (bool? newValue) {
         setState(() {
           room.someoneCleaning = newValue!;
-          rooms
-            .doc(room.uid)
-            .update
-              ({
-                'someoneCleaning':room.someoneCleaning,
-              });
+
         
         });
       },

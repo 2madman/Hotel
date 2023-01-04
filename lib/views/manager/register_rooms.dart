@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/Classes/housekeeper.dart';
 import 'package:first_app/Classes/rooms.dart';
@@ -47,12 +49,32 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
   
   }
 
+  Future refresh() async {
+
+    await FirebaseFirestore.instance.collection('Rooms').get().then(
+    (snapshot) => snapshot.docs.forEach((element) {
+      
+      for(int i=0;i<10;i++){
+        if(liste[i].uid == element.data()['uid']){
+          liste[i].someoneCleaning = element.data()['someoneAlreadyCleaning'];
+        }
+      }
+    }));
+  }
+
+
+  Future<void> _refresh(){
+    
+    refresh();
+    return Future.delayed(
+      const Duration(seconds: 1),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     
     CollectionReference users = FirebaseFirestore.instance.collection('Users');
-
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
@@ -62,7 +84,7 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
       body:  Column(
         children:[ 
           const SizedBox(height: 20,),
-          listViewBuilder(liste),
+          listViewBuilder(notCleanedRooms),
           Expanded(
             child: Align(
               alignment: FractionalOffset.bottomCenter,

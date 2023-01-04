@@ -4,6 +4,7 @@ import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
 import '../../Classes/housekeeper.dart';
 import '../../Classes/rooms.dart';
+import '../../views/manager/manager_view.dart';
 import '../housekeeper/linked_check2.dart';
 
 Future addUserDetails(HouseKeeper a) async{
@@ -58,10 +59,10 @@ Future <dynamic> UserPopOut(BuildContext context)
                           child: const Text("Assign"),
                           onPressed: () {
                             for(int j=0;j<houseWorkers.length;j++){
-                                  if(houseWorkers[j].cleaningRooms == true){                                    
-                                    log(houseWorkers[j].name.toString());                                
-                                  }
-                                }
+                              if(houseWorkers[j].cleaningRooms == true){                                    
+                                log(houseWorkers[j].name.toString());                                
+                              }
+                            }
                             int a=0;
                             for(int i=0;i<liste.length;i++){
                               if(liste[i].someoneAlreadyCleaning == false && liste[i].someoneCleaning == true){
@@ -73,14 +74,17 @@ Future <dynamic> UserPopOut(BuildContext context)
                                   });
                                 
                                 for(int j=0;j<houseWorkers.length;j++){
-                                  if(houseWorkers[j].cleaningRooms == true){                                    
-                                    a=j;
-                                    houseWorkers[j].whichRooms.add(liste[i].roomNumber);                                 
-                                  }
+                                    if(houseWorkers[j].cleaningRooms == true){                                    
+                                      log(houseWorkers[j].whichRooms.toString());
+                                      a=j;
+                                      houseWorkers[j].whichRooms.add(liste[i].roomNumber);                                                                     
+                                      log(liste[i].roomNumber.toString());
+                                    }
                                 }
-                                houseWorkers[a].cleaningRooms = false;
+                                
                               }
                             }
+                            houseWorkers[a].cleaningRooms = false;
                             Users
                               .doc(houseWorkers[a].name)
                               .update
@@ -96,7 +100,17 @@ Future <dynamic> UserPopOut(BuildContext context)
                               title: const Text("Operation is succesfull"),
                               actions: [
                                 TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  onPressed: () async {
+                                    Navigator.pop(context, 'OK');
+                                    Navigator.of(context).pushAndRemoveUntil
+                                      (MaterialPageRoute(
+                                        builder: (context)=> const ManagerView()
+                                      ),(route)=>false
+                                    );
+                                    log("asdad");
+                                    await refresh();
+                                    notCleanedRoom();
+                                  },
                                   child: const Text('OK'),
                                 ),
                               ],                                      

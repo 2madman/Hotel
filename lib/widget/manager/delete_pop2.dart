@@ -50,7 +50,7 @@ Future <dynamic> DeletePopOut2(BuildContext context,var housekeepers,String a)
                         child: TextButton(
                           child: const Text("Fire employee"),
                           onPressed: () {      
-                            HouseKeeper employee = HouseKeeper("","","","");
+                            HouseKeeper employee = HouseKeeper("","","","",[]);
                             for(int i=0;i<housekeepers.length;i++){
                               if(housekeepers[i].delete == true){
                                 employee = housekeepers[i];

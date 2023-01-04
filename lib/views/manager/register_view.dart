@@ -233,14 +233,24 @@ class _RegisterViewState extends State<RegisterView> {
                                   name,email,id,dropValue
                                 );
 
+                                if(dropValue == "Housekeeper"){
+                                  housekeepers.add(HouseKeeper(name,id,dropValue,email,[]));
+                                }
+                                if(dropValue == "Housemen"){
+                                  housemens.add(HouseKeeper(name,id,dropValue,email,[]));
+                                }
+                                if(dropValue == "Supervisor"){
+                                  supervisors.add(HouseKeeper(name,id,dropValue,email,[]));
+                                }
                                 if(dropValue == "Housekeeper" || dropValue == "Housemen"){
-                                  houseWorkers.add(HouseKeeper(name,id,dropValue,email));
-                                  workersExManager.add(HouseKeeper(name,id,dropValue,email));
-                                  allWorkers.add(HouseKeeper(name,id,dropValue,email));
+                                  houseWorkers.add(HouseKeeper(name,id,dropValue,email,[]));
+                                  workersExManager.add(HouseKeeper(name,id,dropValue,email,[]));
+                                  allWorkers.add(HouseKeeper(name,id,dropValue,email,[]));
+                                
                                 }
                                 else{
-                                  allWorkers.add(HouseKeeper(name,id,dropValue,email));
-                                  workersExManager.add(HouseKeeper(name,id,dropValue,email));
+                                  allWorkers.add(HouseKeeper(name,id,dropValue,email,[]));
+                                  workersExManager.add(HouseKeeper(name,id,dropValue,email,[]));
                                 }
                                 
                                 
@@ -265,6 +275,18 @@ class _RegisterViewState extends State<RegisterView> {
                               }
                           
                           on FirebaseAuthException catch(e){
+                             showDialog
+                                ( context: context,
+                                  builder:(context) =>AlertDialog(
+                                  title: const Text("Operation is unsuccesfull."),
+                                  content: Text(e.code.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],                                      
+                                ));
                             log(e.code);
                           }
                         },

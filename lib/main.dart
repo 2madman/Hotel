@@ -22,6 +22,7 @@ var allWorkersIDs = [];
 var allWorkersEmails = [];
 var allWorkersJobs = [];
 var allWorkers = [];
+var allWorkersRooms = [];
 var notCleanedRooms = [];
 int sizeUsers = 0;
 int sizeRooms = 0;
@@ -46,7 +47,6 @@ Future refresh() async {
       if(liste[i].uid == element.data()['uid']){
         liste[i].roomCleaned = element.data()['roomCleaned'];
         liste[i].initialCleaning = element.data()['initialCleaning'];
-        liste[i].someoneCleaning = element.data()['someoneCleaning'];
         liste[i].someoneAlreadyCleaning = element.data()['someoneAlreadyCleaning'];
         liste[i].roomFine = element.data()['roomFine'];
         liste[i].roomNeeds = element.data()['roomNeeds'].toString();
@@ -69,13 +69,14 @@ Future allWorker() async {
     allWorkersIDs.add(element.data()['id'].toString());
     allWorkersEmails.add(element.data()['email'].toString());
     allWorkersJobs.add(element.data()['job'].toString());
+    allWorkersRooms.add(element.data()['whichRooms']);
   }));
 }
 
 void createWorkers(){
 
   for(int i=0;i<sizeUsers;i++){
-    allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],allWorkersJobs[i],allWorkersEmails[i]));
+    allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],allWorkersJobs[i],allWorkersEmails[i],allWorkersRooms[i]));
   }
   for(int i=0;i<sizeUsers;i++){
     if(allWorkers[i].job =="Housekeeper" || allWorkers[i].job =="Housemen")
@@ -88,7 +89,7 @@ void createWorkers(){
 void addWorkers(){
 
   for(int i=0;i<sizeUsers;i++){
-    allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],allWorkersJobs[i],allWorkersEmails[i]));
+    allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],allWorkersJobs[i],allWorkersEmails[i],allWorkersRooms[i]));
   }
   for(int i=0;i<sizeUsers;i++){
     if(allWorkers[i].job =="Housekeeper"){
@@ -112,8 +113,9 @@ void addWorkers(){
 
 void notCleanedRoom(){
 
+  notCleanedRooms.clear();
   for(int i=0;i<liste.length;i++){
-    if(liste[i].someoneCleaning == false){
+    if(liste[i].someoneAlreadyCleaning == false){
       notCleanedRooms.add(liste[i]);
     }
   }
@@ -150,6 +152,7 @@ Future whichRooms() async{
       }
     }
   }
+
 void main () async{
 
   WidgetsFlutterBinding.ensureInitialized();
