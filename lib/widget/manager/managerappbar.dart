@@ -3,6 +3,7 @@ import 'package:first_app/views/manager/manager_rooms_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../views/manager/delete_users.dart';
+import '../../views/manager/history_view.dart';
 import '../../views/manager/register_rooms.dart';
 import '../../views/manager/register_view.dart';
 import '../appbar.dart';
@@ -78,6 +79,16 @@ class ManagerAppBar extends StatelessWidget {
                  Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
                   return const DeleteUser();
+                }));
+              },
+            ),
+            buildMenuItem(
+              text: "History", 
+              icon: Icons.history,
+              onClicked: (){
+                 Navigator.of(context).push
+                  (MaterialPageRoute(builder: (BuildContext context){
+                  return const History();
                 }));
               },
             ),

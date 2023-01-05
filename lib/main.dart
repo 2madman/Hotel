@@ -2,18 +2,18 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:first_app/Classes/history.dart';
 import 'package:first_app/Classes/housekeeper.dart';
 import 'package:first_app/views/housekeeper/housekeeper_view.dart';
-import 'package:first_app/views/housekeeper/rooms_view.dart';
 import 'package:first_app/views/housemen/housemen_view.dart';
 import 'package:first_app/views/login_view.dart';
 import 'package:first_app/views/manager/manager_view.dart';
-import 'package:first_app/views/manager/register_view.dart';
 import 'package:first_app/views/supervisor/supervisor_view.dart';
 import 'package:first_app/widget/appbar.dart';
 import 'package:first_app/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'Classes/rooms.dart';
+import 'package:cron/cron.dart';
 
 int cleaned = 0;
 int notCleaned = 0;
@@ -26,6 +26,8 @@ var allWorkersRooms = [];
 var notCleanedRooms = [];
 int sizeUsers = 0;
 int sizeRooms = 0;
+int cleanedRoomNumber = 0;
+int notCleanedRoomNumber = 0;
 var userRooms = [];
 var userRoomsNums = [];
 var houseWorkers = [];
@@ -33,6 +35,7 @@ var workersExManager = [];
 var housekeepers = [];
 var housemens = [];
 var supervisors = [];
+var storeHistory = [];
 
 Future refresh() async {
 
@@ -84,6 +87,53 @@ void createWorkers(){
       houseWorkers.add(allWorkers[i]);
     }
   }
+}
+
+Future history() async{
+
+  final cron = Cron();
+  
+  cron.schedule(Schedule.parse('30 23 * * * *'), () async {
+    
+    DateTime today = DateTime.now();
+    String todayy = "${today.day}-${today.month}";
+    CollectionReference historyy = FirebaseFirestore.instance.collection('History');
+    CollectionReference rooms = FirebaseFirestore.instance.collection('Rooms');
+
+    for(int i=0;i<liste.length;i++){
+      if(liste[i].roomCleaned == true){
+        cleanedRoomNumber++;
+      }
+      else{
+        notCleanedRoomNumber++;
+      }
+    }
+    
+    historyy
+    .doc(todayy)
+    .set
+      ({
+        'cleaned': cleanedRoomNumber,
+        'notCleaned': notCleanedRoomNumber,
+        'date': todayy, 
+      });
+
+
+    for(int i=0;i<liste.length;i++){
+      rooms
+        .doc(liste[i].uid)
+        .update
+          ({
+            'roomCleaned': false,
+            'initialCleaning':false,
+            'roomFine': false,
+            'roomNeeds': "",            
+          });
+    }
+
+
+
+  });
 }
 
 void addWorkers(){
@@ -153,6 +203,14 @@ Future whichRooms() async{
     }
   }
 
+  Future addHistory() async
+  {
+    await FirebaseFirestore.instance.collection('History').get().then(
+      (snapshot) => snapshot.docs.forEach((element) {
+        storeHistory.add(HistoryFirebase(element.data()['cleaned'],element.data()['notCleaned'],element.data()['date']));      
+      }));  
+  }
+
 void main () async{
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -178,6 +236,8 @@ void main () async{
       }
     }
   }
+  await history();
+  await addHistory();
   runApp(const MyApp());
 }
 
