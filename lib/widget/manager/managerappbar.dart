@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../views/manager/delete_users.dart';
 import '../../views/manager/history_view.dart';
-import '../../views/manager/register_rooms.dart';
+import '../../views/manager/register_room_keeper.dart';
+import '../../views/manager/register_room_men.dart';
 import '../../views/manager/register_view.dart';
 import '../appbar.dart';
 
@@ -53,12 +54,22 @@ class ManagerAppBar extends StatelessWidget {
               },
             ),
             buildMenuItem(
-              text: "Register Rooms", 
+              text: "Register Rooms to Housekeeper", 
               icon: Icons.assignment_ind_rounded,
               onClicked: (){
                  Navigator.of(context).push
                   (MaterialPageRoute(builder: (BuildContext context){
                   return const RegisterRoomsView();
+                }));
+              },
+            ),
+            buildMenuItem(
+              text: "Register Rooms to Housemen", 
+              icon: Icons.assignment_ind_rounded,
+              onClicked: (){
+                 Navigator.of(context).push
+                  (MaterialPageRoute(builder: (BuildContext context){
+                  return const RegisterRoomsMenView();
                 }));
               },
             ),

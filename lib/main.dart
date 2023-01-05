@@ -14,6 +14,9 @@ import 'package:first_app/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'Classes/rooms.dart';
 import 'package:cron/cron.dart';
+import 'package:first_app/views/housekeeper/rooms_view.dart';
+import 'package:first_app/views/manager/register_view.dart';
+
 
 int cleaned = 0;
 int notCleaned = 0;
@@ -29,6 +32,7 @@ int sizeRooms = 0;
 int cleanedRoomNumber = 0;
 int notCleanedRoomNumber = 0;
 var userRooms = [];
+var menRooms = [];
 var userRoomsNums = [];
 var houseWorkers = [];
 var workersExManager = [];
@@ -53,7 +57,7 @@ Future refresh() async {
         liste[i].someoneAlreadyCleaning = element.data()['someoneAlreadyCleaning'];
         liste[i].roomFine = element.data()['roomFine'];
         liste[i].roomNeeds = element.data()['roomNeeds'].toString();
-
+        liste[i].housemen = element.data()['housemen'];
         if(liste[i].roomCleaned == true && liste.length != cleaned+notCleaned){  cleaned++; }
         else if(liste.length != cleaned+notCleaned) { notCleaned++; }
       }
@@ -164,9 +168,15 @@ void addWorkers(){
 void notCleanedRoom(){
 
   notCleanedRooms.clear();
+  menRooms.clear();
   for(int i=0;i<liste.length;i++){
     if(liste[i].someoneAlreadyCleaning == false){
       notCleanedRooms.add(liste[i]);
+    }
+  }
+  for(int i=0;i<liste.length;i++){
+    if(liste[i].housemen == false){
+      menRooms.add(liste[i]);
     }
   }
 
@@ -201,6 +211,7 @@ Future whichRooms() async{
         }
       }
     }
+
   }
 
   Future addHistory() async

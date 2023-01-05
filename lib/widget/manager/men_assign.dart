@@ -15,7 +15,7 @@ Future addUserDetails(HouseKeeper a) async{
   
   }
 
-Future <dynamic> UserPopOut(BuildContext context)
+Future <dynamic> UserPopOutMen(BuildContext context)
 {
   CollectionReference Users = FirebaseFirestore.instance.collection('Users');
   CollectionReference Rooms = FirebaseFirestore.instance.collection('Rooms');
@@ -26,7 +26,7 @@ Future <dynamic> UserPopOut(BuildContext context)
     return StatefulBuilder(
       builder: (context, setState) {
         return AlertDialog(
-            title: const Text("Housekeepers"),
+            title: const Text("Housemens"),
             insetPadding: EdgeInsets.zero,
             content: Stack(
               clipBehavior: Clip.none, children: <Widget>[
@@ -38,15 +38,15 @@ Future <dynamic> UserPopOut(BuildContext context)
                         height: 350,
                         width: 250,
                         child: ListView.builder(
-                            itemCount: housekeepers.length,
+                            itemCount: housemens.length,
                             itemBuilder: (_, index) {
                               return LinkedLabelCheckbox2(
-                                label: housekeepers[index].name,
+                                label: housemens[index].name,
                                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                                value: housekeepers[index].cleaningRooms,
+                                value: housemens[index].cleaningRooms,
                                 onChanged: (bool? newValue) {
                                   setState(() {
-                                    housekeepers[index].cleaningRooms = !housekeepers[index].cleaningRooms; 
+                                    housemens[index].cleaningRooms = !housemens[index].cleaningRooms; 
                                   }); 
                                 },
                               );
@@ -58,38 +58,38 @@ Future <dynamic> UserPopOut(BuildContext context)
                         child: TextButton(
                           child: const Text("Assign"),
                           onPressed: () {
-                            for(int j=0;j<housekeepers.length;j++){
-                              if(housekeepers[j].cleaningRooms == true){                                    
-                                log(housekeepers[j].name.toString());                                
+                            for(int j=0;j<housemens.length;j++){
+                              if(housemens[j].cleaningRooms == true){                                    
+                                log(housemens[j].name.toString());                                
                               }
                             }
                             int a=0;
                             for(int i=0;i<liste.length;i++){
-                              if(liste[i].someoneAlreadyCleaning == false && liste[i].someoneCleaning == true){
+                              if(liste[i].housemen == false && liste[i].someoneCleaning == true){
                                 Rooms
                                 .doc(liste[i].uid)
                                 .update
                                   ({
-                                    'someoneAlreadyCleaning': true,
+                                    'housemen': true,
                                   });
                                 
-                                for(int j=0;j<housekeepers.length;j++){
-                                    if(housekeepers[j].cleaningRooms == true){                                    
-                                      log(housekeepers[j].whichRooms.toString());
+                                for(int j=0;j<housemens.length;j++){
+                                    if(housemens[j].cleaningRooms == true){                                    
+                                      log(housemens[j].whichRooms.toString());
                                       a=j;
-                                      housekeepers[j].whichRooms.add(liste[i].roomNumber);                                                                     
+                                      housemens[j].whichRooms.add(liste[i].roomNumber);                                                                     
                                       log(liste[i].roomNumber.toString());
                                     }
                                 }
                                 
                               }
                             }
-                            housekeepers[a].cleaningRooms = false;
+                            housemens[a].cleaningRooms = false;
                             Users
-                              .doc(housekeepers[a].name)
+                              .doc(housemens[a].name)
                               .update
                                 ({
-                                  'whichRooms':housekeepers[a].whichRooms,
+                                  'whichRooms':housemens[a].whichRooms,
                                 });
                             
                             

@@ -1,22 +1,21 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/Classes/housekeeper.dart';
 import 'package:first_app/Classes/rooms.dart';
 import 'package:first_app/main.dart';
+import 'package:first_app/widget/manager/men_assign.dart';
 import 'package:first_app/widget/manager/room_register_check.dart';
 import 'package:flutter/material.dart';
-
 import '../../widget/manager/assign_popout.dart';
 
-class RegisterRoomsView extends StatefulWidget {
-  const RegisterRoomsView({super.key});
+class RegisterRoomsMenView extends StatefulWidget {
+  const RegisterRoomsMenView({super.key});
 
   @override
-  State<RegisterRoomsView> createState() => _RegisterRoomsViewState();
+  State<RegisterRoomsMenView> createState() => _RegisterRoomsMenViewState();
 }
 
-class _RegisterRoomsViewState extends State<RegisterRoomsView> {
+class _RegisterRoomsMenViewState extends State<RegisterRoomsMenView> {
   
   Widget listViewBuilder(List liste){
 
@@ -84,13 +83,13 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
       body:  Column(
         children:[ 
           const SizedBox(height: 20,),
-          listViewBuilder(notCleanedRooms),
+          listViewBuilder(menRooms),
           Expanded(
             child: Align(
               alignment: FractionalOffset.bottomCenter,
               child: TextButton(
                 onPressed: () => {
-                  UserPopOut(context)
+                  UserPopOutMen(context)
                 },
                 child: const Text(
                   "Assign",
