@@ -77,14 +77,14 @@ Future <void> DeletePopOut(BuildContext context,HouseKeeper employee)
                               for(int j=0; j<whichRooms.length;j++){
                                 if(liste[i].roomNumber == whichRooms[j]){
                                   
-                                  liste[i].someoneAlreadyCleaning = false;
+                                  liste[i].housmen = false;
                                   liste[i].someoneCleaning = false;
                                   rooms
                                     .doc(liste[i].uid)
                                     .update
                                       ({
                                         'someoneCleaning': false,
-                                        'someoneAlreadyCleaning': false,
+                                        'housemen': false,
                                       });
 
                                 }

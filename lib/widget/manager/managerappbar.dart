@@ -104,10 +104,6 @@ class ManagerAppBar extends StatelessWidget {
               },
             ),
             buildMenuItem(
-              text: "Settings", 
-              icon: Icons.settings
-            ),
-            buildMenuItem(
               text: "Log Out", 
               icon: Icons.logout,
               onClicked: (){
