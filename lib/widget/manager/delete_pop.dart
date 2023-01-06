@@ -1,12 +1,10 @@
-import 'dart:developer';
-
 import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
 import '../../Classes/housekeeper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../../Classes/rooms.dart';
 import '../../views/manager/manager_view.dart';
+
 
 Future <void> DeletePopOut(BuildContext context,HouseKeeper employee)
 {

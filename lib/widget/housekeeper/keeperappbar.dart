@@ -3,7 +3,6 @@ import 'package:first_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:first_app/views/housekeeper/rooms_view.dart';
-import '../manager/managerappbar.dart';
 
 String name="";
 

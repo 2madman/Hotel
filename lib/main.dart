@@ -13,9 +13,6 @@ import 'package:first_app/widget/appbar.dart';
 import 'package:first_app/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'Classes/rooms.dart';
-import 'package:cron/cron.dart';
-import 'package:first_app/views/housekeeper/rooms_view.dart';
-import 'package:first_app/views/manager/register_view.dart';
 
 
 int cleaned = 0;
@@ -95,9 +92,10 @@ void createWorkers(){
 
 Future history() async{
 
-  final cron = Cron();
-  
-  cron.schedule(Schedule.parse('30 23 * * * *'), () async {
+  DateTime today = DateTime.now();
+  String hour = today.hour.toString();
+  int intHour = int.parse(hour);
+  if (intHour<=7 || intHour >=20){
     
     DateTime today = DateTime.now();
     String todayy = "${today.day}-${today.month}";
@@ -134,10 +132,8 @@ Future history() async{
             'roomNeeds': "",            
           });
     }
+  }
 
-
-
-  });
 }
 
 void addWorkers(){

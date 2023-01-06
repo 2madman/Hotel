@@ -1,12 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/main.dart';
-import 'package:first_app/widget/manager/delete_pop.dart';
 import 'package:flutter/material.dart';
-
-import '../../Classes/housekeeper.dart';
-import '../../Classes/rooms.dart';
-import '../../widget/housekeeper/linked_check2.dart';
-import '../../widget/manager/assign_popout.dart';
 import '../../widget/manager/delete_pop2.dart';
 
 class DeleteUser extends StatefulWidget {
@@ -18,27 +11,6 @@ class DeleteUser extends StatefulWidget {
 
 class _DeleteUserState extends State<DeleteUser> {
 
-  Future refresh() async {
-
-    /*await FirebaseFirestore.instance.collection('Users').get().then(
-    (snapshot) => snapshot.docs.forEach((element) {
-      
-      for(int i=0;i<workersExManager.length;i++){
-        if(workersExManager[i].name == element.data()['name']){
-          
-        }
-      }
-    }));*/
-  }
-
-
-  Future<void> _refresh(){
-    
-    refresh();
-    return Future.delayed(
-      const Duration(seconds: 1),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

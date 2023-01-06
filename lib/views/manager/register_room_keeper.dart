@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/Classes/housekeeper.dart';
 import 'package:first_app/Classes/rooms.dart';
@@ -72,7 +71,6 @@ class _RegisterRoomsViewState extends State<RegisterRoomsView> {
   @override
   Widget build(BuildContext context) {
     
-    CollectionReference users = FirebaseFirestore.instance.collection('Users');
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(

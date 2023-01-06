@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'package:first_app/widget/manager/managerappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -81,7 +79,6 @@ class _SupervisorViewState extends State<SupervisorView> {
     refresh();
     cleaned = cleanedRoomNumber(liste);
     notCleaned = liste.length - cleaned;
-    CollectionReference rooms = FirebaseFirestore.instance.collection('Rooms');
 
     return Scaffold(      
       appBar: AppBar(

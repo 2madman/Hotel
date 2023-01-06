@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_app/Classes/housekeeper.dart';
 import 'package:first_app/Classes/rooms.dart';
@@ -6,7 +5,6 @@ import 'package:first_app/main.dart';
 import 'package:first_app/widget/manager/men_assign.dart';
 import 'package:first_app/widget/manager/room_register_check.dart';
 import 'package:flutter/material.dart';
-import '../../widget/manager/assign_popout.dart';
 
 class RegisterRoomsMenView extends StatefulWidget {
   const RegisterRoomsMenView({super.key});
@@ -21,16 +19,16 @@ class _RegisterRoomsMenViewState extends State<RegisterRoomsMenView> {
 
     return Expanded(
       child: ListView.builder(
-        itemCount: notCleanedRooms.length % 2 == 0 ? notCleanedRooms.length ~/ 2 : notCleanedRooms.length ~/ 2 + 1,
+        itemCount: liste.length % 2 == 0 ? liste.length ~/ 2 : liste.length ~/ 2 + 1,
         itemBuilder: (_, index) {
           return Row(
             children: [
                 LinkedLabelCheckbox3(
-                  room: notCleanedRooms[index*2],
+                  room: liste[index*2],
                 ),
-              if (index * 2 +1+ 1 <= notCleanedRooms.length)
+              if (index * 2 +1+ 1 <= liste.length)
                 LinkedLabelCheckbox3(
-                  room: notCleanedRooms[index*2+1],
+                  room: liste[index*2+1],
                 ),
             ],
           );

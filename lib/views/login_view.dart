@@ -122,7 +122,6 @@ class _LoginViewState extends State<LoginView> {
                                   email: email,
                                   password: password,);
                               final user = FirebaseAuth.instance.currentUser;
-                              int f1=0,f2=0,f3=0;
                               for(int i=0;i<allWorkers.length;i++){
                                 if(user?.email.toString() == allWorkers[i].email){
                                   if(allWorkers[i].job.toString() == "Housekeeper"){

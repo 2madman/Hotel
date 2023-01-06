@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:first_app/Classes/rooms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -84,7 +81,6 @@ class _HousemenViewState extends State<HousemenView> {
     refresh();
     cleaned = cleanedRoomNumber(liste);
     notCleaned = liste.length - cleaned;
-    CollectionReference rooms = FirebaseFirestore.instance.collection('Rooms');
     return Scaffold(      
       appBar: AppBar(
         title: const Text("Rooms"),
