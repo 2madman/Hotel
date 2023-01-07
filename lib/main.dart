@@ -55,6 +55,7 @@ Future refresh() async {
         liste[i].roomFine = element.data()['roomFine'];
         liste[i].roomNeeds = element.data()['roomNeeds'].toString();
         liste[i].housemen = element.data()['housemen'];
+        liste[i].whoCleans = element.data()['whoCleans'].toString();
         if(liste[i].roomCleaned == true && liste.length != cleaned+notCleaned){  cleaned++; }
         else if(liste.length != cleaned+notCleaned) { notCleaned++; }
       }

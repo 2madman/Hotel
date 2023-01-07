@@ -12,6 +12,7 @@ class Room{
   bool roomFine = false;
   String roomNeeds = "";
   String uid;
+  String whoCleans = "";
   Room(this.roomNumber,this.floor,this.uid);
 
 }

@@ -74,12 +74,19 @@ Future <dynamic> UserPopOut(BuildContext context)
                                   });
                                 
                                 for(int j=0;j<housekeepers.length;j++){
-                                    if(housekeepers[j].cleaningRooms == true){                                    
-                                      log(housekeepers[j].whichRooms.toString());
-                                      a=j;
-                                      housekeepers[j].whichRooms.add(liste[i].roomNumber);                                                                     
-                                      log(liste[i].roomNumber.toString());
-                                    }
+                                  if(housekeepers[j].cleaningRooms == true){                                    
+                                    log(housekeepers[j].whichRooms.toString());
+                                    a=j;
+                                    liste[i].whoCleans = housekeepers[j].name;
+                                    Rooms
+                                      .doc(liste[i].uid)
+                                      .update
+                                        ({
+                                          'whoCleans': housekeepers[j].name,
+                                        });
+                                    housekeepers[j].whichRooms.add(liste[i].roomNumber);                                                                     
+                                    log(liste[i].roomNumber.toString());
+                                  }
                                 }
                                 
                               }

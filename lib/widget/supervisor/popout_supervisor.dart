@@ -13,13 +13,14 @@ Future <void> PopOut(BuildContext context,Room room )
   CollectionReference rooms = FirebaseFirestore.instance.collection('Rooms');
 
   String a = room.roomNumber.toString();
+  String who = room.whoCleans.toString();
   return showDialog(
     context: context,
     builder: (context) {
     return StatefulBuilder(
       builder: (context, setState) {
         return AlertDialog(
-            title: Text("Room $a"),
+            title: Text("Room $a - $who"),
             content: Stack(
               clipBehavior: Clip.none, children: <Widget>[
                 Form(
