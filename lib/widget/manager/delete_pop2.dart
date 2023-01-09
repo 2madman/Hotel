@@ -53,7 +53,7 @@ Future <dynamic> DeletePopOut2(BuildContext context,var housekeepers,String a)
                                 employee = housekeepers[i];
                               }
                             }  
-                            DeletePopOut(context, employee);
+                            DeletePopOut(context, employee,a);
                           },
                         ),
                       ),

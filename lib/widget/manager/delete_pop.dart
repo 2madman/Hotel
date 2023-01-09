@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:first_app/main.dart';
 import 'package:flutter/material.dart';
 import '../../Classes/housekeeper.dart';
@@ -6,7 +8,7 @@ import '../../Classes/rooms.dart';
 import '../../views/manager/manager_view.dart';
 
 
-Future <void> DeletePopOut(BuildContext context,HouseKeeper employee)
+Future <void> DeletePopOut(BuildContext context,HouseKeeper employee,String job)
 {
 
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
@@ -43,54 +45,55 @@ Future <void> DeletePopOut(BuildContext context,HouseKeeper employee)
                         child: TextButton(
                           child: const Text("Okay"),
                           onPressed: () async {
-                            
-                            /*await FirebaseFirestore.instance.collection('Rooms').get().then(
-                              (snapshot) => snapshot.docs.forEach((element) {
-                              
-                              sizeRooms = snapshot.docs.length;
-                              docIDs.add(element.reference.id);  
-                              
-                              for(int i=0;i<sizeRooms;i++){
-                                if(liste[i].uid == element.data()['uid']){
-                                  liste[i].roomCleaned = element.data()['roomCleaned'];
-                                  liste[i].initialCleaning = element.data()['initialCleaning'];
-                                  liste[i].someoneCleaning = element.data()['someoneCleaning'];
-                                  liste[i].someoneAlreadyCleaning = element.data()['someoneAlreadyCleaning'];
-                                  liste[i].roomFine = element.data()['roomFine'];
-                                  liste[i].roomNeeds = element.data()['roomNeeds'].toString();
-
-                                  if(liste[i].roomCleaned == true && liste.length != cleaned+notCleaned){  cleaned++; }
-                                  else if(liste.length != cleaned+notCleaned) { notCleaned++; }
-                                }
-                              }
-                              })
-                            );*/
+                            log("ege");
                             var whichRooms = [];
                             await FirebaseFirestore.instance.collection('Users').get().then(
                               (snapshot) => snapshot.docs.forEach((element) {                                                                
                                 if(employee.name.toString() ==  (element.data()['name'].toString())){
                                   whichRooms = (element.data()['whichRooms']);                            
+                                  log("ege2");
                                 }
                             }));
                             
-                            for(int i=0; i<liste.length ;i++){
-                              for(int j=0; j<whichRooms.length;j++){
-                                if(liste[i].roomNumber == whichRooms[j]){
-                                  
-                                  liste[i].housmen = false;
-                                  liste[i].someoneCleaning = false;
-                                  rooms
-                                    .doc(liste[i].uid)
-                                    .update
-                                      ({
-                                        'someoneCleaning': false,
-                                        'housemen': false,
-                                      });
+                            if(job == "Housemens"){
+                              log("ege3");
+                              for(int i=0; i<liste.length ;i++){
+                                for(int j=0; j<whichRooms.length;j++){
+                                  if(liste[i].roomNumber == whichRooms[j]){
+                                    log("eege4");
+                                    liste[i].housemen = false;
+                                    liste[i].someoneCleaning = false;
+                                    rooms
+                                      .doc(liste[i].uid)
+                                      .update
+                                        ({
+                                          'someoneCleaning': false,
+                                          'housemen': false,
+                                        });
 
+                                  }
                                 }
                               }
                             }
+                            else if(job == "Housekeepers"){
+                              for(int i=0; i<liste.length ;i++){
+                                for(int j=0; j<whichRooms.length;j++){
+                                  if(liste[i].roomNumber == whichRooms[j]){
+                                    
+                                    liste[i].someoneAlreadyCleaning= false;
+                                    liste[i].someoneCleaning = false;
+                                    rooms
+                                      .doc(liste[i].uid)
+                                      .update
+                                        ({
+                                          'someoneCleaning': false,
+                                          'someoneAlreadyCleaning': false,
+                                        });
 
+                                  }
+                                }
+                              }
+                            }
                             Navigator.of(context, rootNavigator: true).pop('dialog');  
 
                             showDialog

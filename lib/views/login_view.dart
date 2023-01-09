@@ -125,6 +125,8 @@ class _LoginViewState extends State<LoginView> {
                               for(int i=0;i<allWorkers.length;i++){
                                 if(user?.email.toString() == allWorkers[i].email){
                                   if(allWorkers[i].job.toString() == "Housekeeper"){
+                                    await whichRooms();
+                                    addRooms();
                                     Navigator.of(context).pushAndRemoveUntil
                                       (MaterialPageRoute(
                                         builder: (context)=> const HouseKeeperView()
@@ -132,6 +134,8 @@ class _LoginViewState extends State<LoginView> {
                                     );
                                   }
                                   else if(allWorkers[i].job.toString() == "Housemen"){
+                                    await whichRooms();
+                                    addRooms();
                                     Navigator.of(context).pushAndRemoveUntil
                                       (MaterialPageRoute(
                                         builder: (context)=> const HousemenView()
@@ -157,12 +161,18 @@ class _LoginViewState extends State<LoginView> {
                               
                           }
                           on FirebaseAuthException catch(e){
-                            if(e.code == "user-not-found"){
-                              const AlertDialog(title: Text("Error"),);
-                            }
-                            else{
-                              log(e.code);
-                            }
+                            showDialog
+                                ( context: context,
+                                  builder:(context) =>AlertDialog(
+                                  title: const Text("Wrong credentials."),
+                                  content: Text(e.code.toString()),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],                                      
+                                ));
                           }
                         },
                         child: const Text(
@@ -177,12 +187,6 @@ class _LoginViewState extends State<LoginView> {
                       )
                     )
                   ),
-              /*TextButton(
-                onPressed: () {
-                },
-                child: const Text(
-                  'Forgot your password'),
-              ),*/
             ],
       ); 
 
