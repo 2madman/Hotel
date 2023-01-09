@@ -106,6 +106,9 @@ Future <void> DeletePopOut(BuildContext context,HouseKeeper employee,String job)
                                     users
                                       .doc(employee.name)
                                       .delete();
+                                    await allWorker();
+                                    createWorkers();
+                                    addWorkers();
                                     Navigator.pop(context, 'OK');  
                                     Navigator.of(context, rootNavigator: true).pop('dialog');  
                                     Navigator.of(context).pushAndRemoveUntil

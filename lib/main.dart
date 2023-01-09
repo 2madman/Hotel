@@ -139,6 +139,11 @@ Future history() async{
 
 void addWorkers(){
 
+  allWorkers.clear();
+  housekeepers.clear();
+  housemens.clear();
+  supervisors.clear();
+  workersExManager.clear();
   for(int i=0;i<sizeUsers;i++){
     allWorkers.add(HouseKeeper(allWorkersNames[i],allWorkersIDs[i],allWorkersJobs[i],allWorkersEmails[i],allWorkersRooms[i]));
   }
